@@ -5,15 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegiStar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="114,162,0,0" VerticalAlignment="Top" Width="75"/>
+        Title="Login Window" Height="250" Width="280">
 
-      
-    
+    <Grid Margin="20">
 
-       
-    
-<Label>Start</Label>
+        <!--Definitions for the main grid-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Username and Password grid-->
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Username fields-->
+            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">Username :</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
+
+            <!--Password fields-->
+            <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Password :</Label>
+            <PasswordBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!--Grid for the Login and Cancel buttons-->
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Cancel button-->
+            <Button Margin="5" Grid.Column="1" VerticalAlignment="Center" Height="25" Content="Cancel"/>
+
+            <!--Login button-->
+            <Button Margin="5" Grid.Column="2" VerticalAlignment="Center" Height="25" Content="Login"/>
+        </Grid>
     </Grid>
 </Window>
