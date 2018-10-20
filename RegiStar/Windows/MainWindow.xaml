@@ -31,12 +31,12 @@
             </Grid.RowDefinitions>
 
             <!--Username fields-->
-            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">Username :</Label>
-            <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">UserID :</Label>
+            <TextBox x:Name="txtUserID" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
 
             <!--Password fields-->
             <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Password :</Label>
-            <PasswordBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+            <PasswordBox x:Name="txtPassword" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
         </Grid>
 
         <!--Grid for the Login and Cancel buttons-->
@@ -54,7 +54,7 @@
             <Button Margin="5" Grid.Column="1" VerticalAlignment="Center" Height="25" Content="Cancel"/>
 
             <!--Login button-->
-            <Button Margin="5" Grid.Column="2" VerticalAlignment="Center" Height="25" Content="Login"/>
+            <Button Margin="5" Grid.Column="2" VerticalAlignment="Center" Height="25" Content="Login" Click="Button_Click"/>
         </Grid>
     </Grid>
 </Window>
