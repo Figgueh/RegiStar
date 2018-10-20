@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Class.cs" />
+    <Compile Include="Data\Teacher.cs" />
+    <Compile Include="Data\Student.cs" />
     <Compile Include="Windows\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
