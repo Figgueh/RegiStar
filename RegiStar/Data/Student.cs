@@ -162,6 +162,11 @@ namespace RegiStar.Data
             }
         }
 
+        public Student()
+        {
+
+        }
+
         //Full Constructor for student.
         public Student(int studentID, string firstName, string lastName, DateTime dob, DateTime joinDate, string address, string city, string region, string postalcode, string country, string email, string phone, bool status)
         {

@@ -250,7 +250,7 @@ namespace RegiStar.Windows
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnAddStudent_Click(object sender, RoutedEventArgs e)
         {
             //Add the selected students to the selected list.
             student = ddlStudent.SelectedItem as Student;
@@ -307,6 +307,27 @@ namespace RegiStar.Windows
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        private void btnNewStudent_Click(object sender, RoutedEventArgs e)
+        {
+            StudentView studentView = new StudentView();
+            studentView.Show();
+        }
+
+        private void btnEditStudent_Click(object sender, RoutedEventArgs e)
+        {
+            //Get the selected item.
+            var selected = listStudent.SelectedValue as ClassRoomStudents;
+
+            //Pull the student from the selected item.
+            Student selectedStudent = selected.StudentID;
+
+            //Send it to the constructor.
+            StudentView studentView = new StudentView(selectedStudent);
+            
+            //Show the window.
+            studentView.Show();
         }
     }
 }

@@ -43,11 +43,11 @@ namespace RegiStar.Data
             }
         }
 
+
         public ClassRoomStudents(Class classRoomID, Student studentID)
         {
             _classRoomID = classRoomID;
             _studentID = studentID;
-
         }
 
         public override string ToString()
