@@ -51,7 +51,7 @@
             </Grid.RowDefinitions>
 
             <!--Cancel button-->
-            <Button Margin="5" Grid.Column="1" VerticalAlignment="Center" Height="25" Content="Cancel"/>
+            <Button Margin="5" Grid.Column="1" VerticalAlignment="Center" Height="25" Content="Cancel" Click="Button_Click_1"/>
 
             <!--Login button-->
             <Button Margin="5" Grid.Column="2" VerticalAlignment="Center" Height="25" Content="Login" Click="Button_Click"/>

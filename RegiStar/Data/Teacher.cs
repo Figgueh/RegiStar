@@ -9,7 +9,7 @@ namespace RegiStar.Data
     public class Teacher
     {
         //Variables
-        private int _studentID;
+        private int _teacherID;
         private string _firstName;
         private string _lastName;
         private DateTime _dob;
@@ -19,11 +19,12 @@ namespace RegiStar.Data
         private string _region;
         private string _postalCode;
         private string _country;
+        private string _email;
         private string _phone;
         private bool _status;
 
         //Getters and setters.
-        public int StudentID { get => _studentID; set => _studentID = value; }
+        public int TeacherID { get => _teacherID; set => _teacherID = value; }
         public string FirstName { get => _firstName; set => _firstName = value; }
         public string LastName { get => _lastName; set => _lastName = value; }
         public DateTime Dob { get => _dob; set => _dob = value; }
@@ -33,7 +34,28 @@ namespace RegiStar.Data
         public string Region { get => _region; set => _region = value; }
         public string PostalCode { get => _postalCode; set => _postalCode = value; }
         public string Country { get => _country; set => _country = value; }
+        public string Email { get => _email; set => _email = value; }
         public string Phone { get => _phone; set => _phone = value; }
         public bool Status { get => _status; set => _status = value; }
+        public string FullName { get => _firstName + " " + _lastName; }
+
+
+        //Full Constructor for teachers.
+        public Teacher(int teacherID, string firstName, string lastName, DateTime dob, DateTime joinDate, string address, string city, string region, string postalcode, string country, string email, string phone, bool status)
+        {
+            _teacherID = teacherID;
+            _firstName = firstName;
+            _lastName = lastName;
+            _dob = dob;
+            _joinDate = joinDate;
+            _address = address;
+            _city = city;
+            _region = region;
+            _postalCode = postalcode;
+            _country = country;
+            Email = email;
+            _phone = phone;
+            _status = status;
+        }
     }
 }

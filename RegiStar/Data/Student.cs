@@ -19,6 +19,7 @@ namespace RegiStar.Data
         private string _region;
         private string _postalCode;
         private string _country;
+        private string _email;
         private string _phone;
         private bool _status;
 
@@ -33,7 +34,27 @@ namespace RegiStar.Data
         public string Region { get => _region; set => _region = value; }
         public string PostalCode { get => _postalCode; set => _postalCode = value; }
         public string Country { get => _country; set => _country = value; }
+        public string Email { get => _email; set => _email = value; }
         public string Phone { get => _phone; set => _phone = value; }
         public bool Status { get => _status; set => _status = value; }
+        public string FullName { get => _firstName + " " + _lastName; }
+
+        //Full Constructor for student.
+        public Student(int studentID, string firstName, string lastName, DateTime dob, DateTime joinDate, string address, string city, string region, string postalcode, string country, string email, string phone, bool status)
+        {
+            _studentID = studentID;
+            _firstName = firstName;
+            _lastName = lastName;
+            _dob = dob;
+            _joinDate = joinDate;
+            _address = address;
+            _city = city;
+            _region = region;
+            _postalCode = postalcode;
+            _country = country;
+            _email = email;
+            _phone = phone;
+            _status = status;
+        }
     }
 }

@@ -20,10 +20,10 @@
         </Grid.RowDefinitions>
 
         <!--Student Dropdown list-->
-        <ComboBox VerticalAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0"/>
+        <ComboBox x:Name="ddlStudent" VerticalAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0" DisplayMemberPath="FullName" SelectedValuePath="StudentID" />
 
         <!--Class Dropdown list-->
-        <ComboBox VerticalAlignment="Center" Margin="10" Grid.Column="1" Grid.Row="0"/>
+        <ComboBox x:Name="ddlClass" VerticalAlignment="Center" Margin="10" Grid.Column="1" Grid.Row="0"/>
         
         <!--Add Button-->
         <Button VerticalAlignment="Center" Margin="50,0,50,0" Grid.Column="2" Grid.Row="0" Content="Add"/>
@@ -35,7 +35,7 @@
         </StackPanel>
         
         <!--List for students in a specific class-->
-        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <ListBox x:Name="listStudent" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
 
 
     </Grid>

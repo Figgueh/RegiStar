@@ -25,6 +25,8 @@ namespace RegiStar
         public MainWindow()
         {
             InitializeComponent();
+            txtUserID.Text = "1";
+            txtPassword.Password = "admin";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,48 +50,49 @@ namespace RegiStar
                 //Start a new connection to the server.
                 using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
                 {
-                    //Create query to be executed.
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblUsers WHERE userID=" + userID, conn);
-
                     //Open the connection.
                     conn.Open();
 
-                    //Open reader to receive values.
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        //If we weren't able to pull the userID then throw a new exception.
-                        if (!reader.HasRows)
-                            throw new Exception("Unable to find the user in our database.");
+                    //Create query to be executed.
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblUsers WHERE userID=" + userID, conn)){
 
-
-                        //Check the if the password was submitted.
-                        if (txtPassword.Password.Length == 0)
-                            throw new Exception("You failed to enter a password.");
-
-
-                        //While we receive the values from the database:
-                        while (reader.Read())
+                        //Open reader to receive values.
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            //Check if the passwords are the same.
-                            if (reader.GetString(1) == txtPassword.Password)
+                            //If we weren't able to pull the userID then throw a new exception.
+                            if (!reader.HasRows)
+                                throw new Exception("Unable to find the user in our database.");
+
+
+                            //Check the if the password was submitted.
+                            if (txtPassword.Password.Length == 0)
+                                throw new Exception("You failed to enter a password.");
+
+
+                            //While we receive the values from the database:
+                            while (reader.Read())
                             {
-                                //Read their access level and display the correct window.
-                                if (reader.GetInt32(2) == 1)
+                                //Check if the passwords are the same.
+                                if (reader.GetString(1) == txtPassword.Password)
                                 {
-                                    Admin admin = new Admin();
-                                    admin.Show();
-                                    this.Hide();
+                                    //Read their access level and display the correct window.
+                                    if (reader.GetInt32(2) == 1)
+                                    {
+                                        Admin admin = new Admin();
+                                        admin.Show();
+                                        this.Hide();
+                                    }
+                                    else
+                                    {
+                                        User user = new User();
+                                        user.Show();
+                                        this.Hide();
+                                    }
                                 }
                                 else
                                 {
-                                    User user = new User();
-                                    user.Show();
-                                    this.Hide();
+                                    throw new Exception("Incorrect password.");
                                 }
-                            }
-                            else
-                            {
-                                throw new Exception("Incorrect password.");
                             }
                         }
                     }
@@ -101,6 +104,11 @@ namespace RegiStar
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
