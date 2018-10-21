@@ -27,25 +27,30 @@ namespace RegiStar.Windows
         private ObservableCollection<Class> classList;
         private ObservableCollection<ClassRoomStudents> classStudentList;
 
+        //Objects:
         Student student;
         Class classes;
         Teacher teacher;
         ClassRoomStudents classOfStudent;
 
+        
+
         public Admin()
         {
+            //Initialize lists.
             studentList = new ObservableCollection<Student>();
             classList = new ObservableCollection<Class>();
             classStudentList = new ObservableCollection<ClassRoomStudents>();
-
             InitializeComponent();
+
+
+            //Get lists.
             getStudents();
             getClasses();
 
+            //Bind data to controls.
             ddlStudent.ItemsSource = studentList;
             ddlClass.ItemsSource = classList;
-            
-
         }
 
 
@@ -87,9 +92,6 @@ namespace RegiStar.Windows
                             {
                                 MessageBox.Show("Failed to create class");
                             }
-
-                            //Then add the student to the list of students.
-                            studentList.Add(student);
                         }
                     }
                 }
@@ -191,16 +193,23 @@ namespace RegiStar.Windows
 
         private void ddlClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Get the selected item in the dropdown list as a class.
             Class selectedClass = ddlClass.SelectedItem as Class;
+
+            //Pass the classroomID to the function that returns the list of students in that class.
             getClassStudentList(selectedClass.ClassRoomID);
 
+            //Bind it to the listbox.
             listStudent.ItemsSource = classStudentList;
+
+            //Show the user the name of the class thats selected.
+            labelClass.Content = getClassName(selectedClass);
 
         }
 
         private void getClassStudentList(int classRoomID)
         {
-            //Clear the list.
+            //Clear the list
             classStudentList = new ObservableCollection<ClassRoomStudents>();
 
             //Setup connection to database.
@@ -220,10 +229,82 @@ namespace RegiStar.Windows
                         //While reading the data:
                         while (reader.Read())
                         {
-                            classOfStudent = new ClassRoomStudents(classRoomID, Convert.ToInt32(reader["studentID"]));
-                            classStudentList.Add(classOfStudent);
+
+                            //Get the student ID:
+                            int studentID = Convert.ToInt32(reader["studentID"]);
+                            Class classRoom = ddlClass.SelectedItem as Class;
+
+
+                            //look in the list of students for the student.
+                            foreach (Student student in studentList)
+                            {
+                                if(student.StudentID == studentID)
+                                {
+                                    classOfStudent = new ClassRoomStudents(classRoom, student);
+                                    classStudentList.Add(classOfStudent);
+                                }
+                            }
                         }
                     }
+                }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Add the selected students to the selected list.
+            student = ddlStudent.SelectedItem as Student;
+            classes = ddlClass.SelectedItem as Class;
+            classOfStudent = new ClassRoomStudents(classes, student);
+
+            //Save to the database.
+            save(classOfStudent);
+
+            classStudentList.Add(classOfStudent);
+
+            //Bind it to the listbox.
+            listStudent.ItemsSource = classStudentList;
+
+        }
+
+        private string getClassName(Class _class)
+        {
+            string className;
+            //Get the GradeID of the class
+            int classGradeID = _class.GradeID;
+
+            //Setup connection to database.
+            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            {
+                //Open the connection.
+                conn.Open();
+
+                //Create query.
+                using (SqlCommand cmd = new SqlCommand("SELECT name FROM dbo.tblGrades WHERE gradeID=" + classGradeID, conn))
+                {
+                    className = cmd.ExecuteScalar() as string;
+                }
+            }
+            return className;
+        }
+
+        private void save(ClassRoomStudents classOfStudent)
+        {
+            //Setup connection to database.
+            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            {
+                //Open the connection.
+                conn.Open();
+
+                //Create query.
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO dbo.tblClassRoomStudents(classRoomID, studentID) VALUES(@ClassRoomID, @StudentID)", conn))
+                {
+                    //Create the Parameters
+                    cmd.Parameters.AddWithValue("@ClassRoomID", classOfStudent.ClassRoomID.ClassRoomID);
+                    cmd.Parameters.AddWithValue("@StudentID", classOfStudent.StudentID.StudentID);
+
+                    //Send the Data
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

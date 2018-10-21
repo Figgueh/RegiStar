@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RegiStar.Data
 {
-    public class Teacher
+    public class Teacher : INotifyPropertyChanged
     {
         //Variables
         private int _teacherID;
@@ -23,22 +24,144 @@ namespace RegiStar.Data
         private string _phone;
         private bool _status;
 
-        //Getters and setters.
-        public int TeacherID { get => _teacherID; set => _teacherID = value; }
-        public string FirstName { get => _firstName; set => _firstName = value; }
-        public string LastName { get => _lastName; set => _lastName = value; }
-        public DateTime Dob { get => _dob; set => _dob = value; }
-        public DateTime JoinDate { get => _joinDate; set => _joinDate = value; }
-        public string Address { get => _address; set => _address = value; }
-        public string City { get => _city; set => _city = value; }
-        public string Region { get => _region; set => _region = value; }
-        public string PostalCode { get => _postalCode; set => _postalCode = value; }
-        public string Country { get => _country; set => _country = value; }
-        public string Email { get => _email; set => _email = value; }
-        public string Phone { get => _phone; set => _phone = value; }
-        public bool Status { get => _status; set => _status = value; }
-        public string FullName { get => _firstName + " " + _lastName; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        //Getters and setters.
+        //Getters and setters.
+        public int TeacherID
+        {
+            get { return this._teacherID; }
+            set
+            {
+                _teacherID = value;
+                OnPropertyChanged("TeacherID");
+            }
+        }
+        public string FirstName
+        {
+            get { return this._firstName; }
+            set
+            {
+                _firstName = value;
+                OnPropertyChanged("FirstName");
+            }
+        }
+        public string LastName
+        {
+            get { return this._lastName; }
+            set
+            {
+                _lastName = value;
+                OnPropertyChanged("LastName");
+            }
+        }
+        public DateTime Dob
+        {
+            get { return this._dob; }
+            set
+            {
+                _dob = value;
+                OnPropertyChanged("Dob");
+            }
+        }
+        public DateTime JoinDate
+        {
+            get { return this._joinDate; }
+            set
+            {
+                _joinDate = value;
+                OnPropertyChanged("JoinDate");
+            }
+        }
+        public string Address
+        {
+            get { return this._address; }
+            set
+            {
+                _address = value;
+                OnPropertyChanged("Address");
+            }
+        }
+        public string City
+        {
+            get { return this._city; }
+            set
+            {
+                _city = value;
+                OnPropertyChanged("City");
+            }
+        }
+        public string Region
+        {
+            get { return this._region; }
+            set
+            {
+                _region = value;
+                OnPropertyChanged("Region");
+            }
+        }
+        public string PostalCode
+        {
+            get { return this._postalCode; }
+            set
+            {
+                _postalCode = value;
+                OnPropertyChanged("PostalCode");
+            }
+        }
+        public string Country
+        {
+            get { return this._country; }
+            set
+            {
+                _country = value;
+                OnPropertyChanged("Country");
+            }
+        }
+        public string Email
+        {
+            get { return this._email; }
+            set
+            {
+                _email = value;
+                OnPropertyChanged("Email");
+            }
+        }
+        public string Phone
+        {
+            get { return this._phone; }
+            set
+            {
+                _phone = value;
+                OnPropertyChanged("Phone");
+            }
+        }
+        public bool Status
+        {
+            get { return this._status; }
+            set
+            {
+                _status = value;
+                OnPropertyChanged("Status");
+            }
+        }
+        public string FullName
+        {
+            get
+            {
+                OnPropertyChanged("FirstName");
+                OnPropertyChanged("LastName");
+                return _firstName + " " + _lastName;
+            }
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         //Full Constructor for teachers.
         public Teacher(int teacherID, string firstName, string lastName, DateTime dob, DateTime joinDate, string address, string city, string region, string postalcode, string country, string email, string phone, bool status)

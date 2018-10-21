@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RegiStar.Data
 {
-    public class Class
+    public class Class : INotifyPropertyChanged
     {
         //Variables.
         private int _classRoomID;
@@ -16,13 +17,63 @@ namespace RegiStar.Data
         private bool _status;
         private Teacher _teacher;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         //Getters and Setters
-        public int ClassRoomID { get => _classRoomID; set => _classRoomID = value; }
-        public DateTime ClassRoomYear { get => _classRoomYear; set => _classRoomYear = value; }
-        public int GradeID { get => _gradeID; set => _gradeID = value; }
-        public string Section { get => _section; set => _section = value; }
-        public bool Status { get => _status; set => _status = value; }
-        public Teacher Teacher { get => _teacher; set => _teacher = value; }
+        public int ClassRoomID
+        {
+            get { return this._classRoomID; }
+            set
+            {
+                _classRoomID = value;
+                OnPropertyChanged("ClassRoomID");
+            }
+        }
+        public DateTime ClassRoomYear
+        {
+            get { return this._classRoomYear; }
+            set
+            {
+                _classRoomYear = value;
+                OnPropertyChanged("ClassRoomYear");
+            }
+        }
+        public int GradeID
+        {
+            get { return this._gradeID; }
+            set
+            {
+                _gradeID = value;
+                OnPropertyChanged("GradeID");
+            }
+        }
+        public string Section
+        {
+            get { return this._section; }
+            set
+            {
+                _section = value;
+                OnPropertyChanged("Section");
+            }
+        }
+        public bool Status
+        {
+            get { return this._status; }
+            set
+            {
+                _status = value;
+                OnPropertyChanged("Status");
+            }
+        }
+        public Teacher Teacher
+        {
+            get { return this._teacher; }
+            set
+            {
+                _teacher = value;
+                OnPropertyChanged("Teacher");
+            }
+        }
 
         //Main Class Constructor
         public Class(int classRoomID, DateTime classRoomYear, string section, int gradeID, bool status, Teacher teacher)
@@ -33,6 +84,14 @@ namespace RegiStar.Data
             _section = section;
             _status = status;
             _teacher = teacher;
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
