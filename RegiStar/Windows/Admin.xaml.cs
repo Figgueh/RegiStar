@@ -24,19 +24,118 @@ namespace RegiStar.Windows
     {
         //Variables:
         private ObservableCollection<Student> studentList;
+        private ObservableCollection<Class> classList;
+        private ObservableCollection<ClassRoomStudents> classStudentList;
+
         Student student;
+        Class classes;
+        Teacher teacher;
+        ClassRoomStudents classOfStudent;
 
         public Admin()
         {
             studentList = new ObservableCollection<Student>();
+            classList = new ObservableCollection<Class>();
+            classStudentList = new ObservableCollection<ClassRoomStudents>();
 
             InitializeComponent();
             getStudents();
+            getClasses();
 
             ddlStudent.ItemsSource = studentList;
-            listStudent.ItemsSource = studentList;
+            ddlClass.ItemsSource = classList;
             
 
+        }
+
+
+
+        private void getClasses()
+        {
+            //Setup connection to database.
+            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            {
+                //Open the connection.
+                conn.Open();
+
+                //Create query.
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblClassRooms", conn))
+                {
+
+                    //Setup reader to interpret the data.
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        //While reading the data:
+                        while (reader.Read())
+                        {
+                            //Create a new student with the data.
+                            try
+                            {
+                                classes = new Class(
+                                Convert.ToInt32(reader["classRoomID"]),
+                                Convert.ToDateTime(reader["classRoomYear"]),
+                                reader["section"].ToString(),
+                                Convert.ToInt32(reader["gradeID"]),
+                                Convert.ToBoolean(reader["status"]),
+                                getTeacher(Convert.ToInt32(reader["teacherID"]))
+                                );
+
+                                classList.Add(classes);
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Failed to create class");
+                            }
+
+                            //Then add the student to the list of students.
+                            studentList.Add(student);
+                        }
+                    }
+                }
+            }
+        }
+
+        private Teacher getTeacher(int teacherID)
+        {
+            //Setup connection to database.
+            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            {
+                //Open the connection.
+                conn.Open();
+
+                //Create query.
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblTeachers WHERE teacherID=" + teacherID, conn))
+                {
+
+                    //Setup reader to interpret the data.
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        //While reading the data:
+                        while (reader.Read())
+                        {
+                            teacher = new Teacher(
+                                Convert.ToInt32(reader["teacherID"]),
+                                reader["firstName"].ToString(),
+                                reader["lastName"].ToString(),
+                                Convert.ToDateTime(reader["dob"]),
+                                Convert.ToDateTime(reader["joinDate"]),
+                                reader["address"].ToString(),
+                                reader["city"].ToString(),
+                                reader["region"].ToString(),
+                                reader["postalCode"].ToString(),
+                                reader["country"].ToString(),
+                                reader["email"].ToString(),
+                                reader["phone"].ToString(),
+                                Convert.ToBoolean(reader["status"])
+                                );
+                        }
+                    }
+                }
+            }
+
+            return teacher;
         }
 
         private void getStudents()
@@ -84,6 +183,45 @@ namespace RegiStar.Windows
 
                             //Then add the student to the list of students.
                             studentList.Add(student);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ddlClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Class selectedClass = ddlClass.SelectedItem as Class;
+            getClassStudentList(selectedClass.ClassRoomID);
+
+            listStudent.ItemsSource = classStudentList;
+
+        }
+
+        private void getClassStudentList(int classRoomID)
+        {
+            //Clear the list.
+            classStudentList = new ObservableCollection<ClassRoomStudents>();
+
+            //Setup connection to database.
+            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            {
+                //Open the connection.
+                conn.Open();
+
+                //Create query.
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblClassRoomStudents WHERE classRoomID=" + classRoomID, conn))
+                {
+
+                    //Setup reader to interpret the data.
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        //While reading the data:
+                        while (reader.Read())
+                        {
+                            classOfStudent = new ClassRoomStudents(classRoomID, Convert.ToInt32(reader["studentID"]));
+                            classStudentList.Add(classOfStudent);
                         }
                     }
                 }
