@@ -162,6 +162,11 @@ namespace RegiStar.Data
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
+        
+        public Teacher()
+        {
+
+        }
 
         //Full Constructor for teachers.
         public Teacher(int teacherID, string firstName, string lastName, DateTime dob, DateTime joinDate, string address, string city, string region, string postalcode, string country, string email, string phone, bool status)

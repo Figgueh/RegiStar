@@ -140,7 +140,7 @@ namespace RegiStar.Windows
             return teacher;
         }
 
-        private void getStudents()
+        public void getStudents()
         {
             //Setup connection to database.
             using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
@@ -311,7 +311,7 @@ namespace RegiStar.Windows
 
         private void btnNewStudent_Click(object sender, RoutedEventArgs e)
         {
-            StudentView studentView = new StudentView();
+            PeopleView studentView = new PeopleView(new Student());
             studentView.Show();
         }
 
@@ -324,10 +324,32 @@ namespace RegiStar.Windows
             Student selectedStudent = selected.StudentID;
 
             //Send it to the constructor.
-            StudentView studentView = new StudentView(selectedStudent);
+            PeopleView studentView = new PeopleView(selectedStudent);
             
             //Show the window.
             studentView.Show();
+        }
+
+        private void btnNewTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            PeopleView teacherView = new PeopleView(new Teacher());
+            teacherView.Show();
+
+        }
+
+        private void btnEditTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            //Get the selected item.
+            var selected = listStudent.SelectedValue as ClassRoomStudents;
+
+            //Pull the class from the selected item.
+            Class selectedClass = selected.ClassRoomID;
+
+            //Pull the teacher from the selected class
+            Teacher selectedTeacher = selectedClass.Teacher;
+
+            PeopleView teacherView = new PeopleView(selectedTeacher);
+            teacherView.Show();
         }
     }
 }

@@ -59,8 +59,11 @@
     <Compile Include="Data\ClassRoomStudents.cs" />
     <Compile Include="Data\Teacher.cs" />
     <Compile Include="Data\Student.cs" />
-    <Compile Include="Windows\StudentView.xaml.cs">
-      <DependentUpon>StudentView.xaml</DependentUpon>
+    <Compile Include="Data\Users.cs" />
+    <Compile Include="Validation\LengthValidation.cs" />
+    <Compile Include="Validation\StudentValidation.cs" />
+    <Compile Include="Windows\PeopleView.xaml.cs">
+      <DependentUpon>PeopleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
@@ -84,7 +87,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\StudentView.xaml">
+    <Page Include="Windows\PeopleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,8 +122,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
