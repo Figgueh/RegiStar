@@ -23,5 +23,25 @@ namespace RegiStar.Windows
         {
             InitializeComponent();
         }
+
+        private void btnAddStudent_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAcademicDetails_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
