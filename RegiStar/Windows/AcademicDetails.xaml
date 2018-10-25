@@ -1,0 +1,28 @@
+﻿<Window x:Class="RegiStar.Windows.AcademicDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegiStar.Windows"
+        mc:Ignorable="d"
+        Title="AcademicDetails" Height="450" Width="281.386">
+    <Grid>
+        <Label x:Name="lblStudentID" Content="StudentID" HorizontalAlignment="Left" Margin="21,21,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblStudentName" Content="Name" HorizontalAlignment="Left" Margin="21,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.103,0.357"/>
+        <ListView x:Name="lstListOfPreviousCourses" HorizontalAlignment="Left" Height="214" Margin="21,78,0,0" VerticalAlignment="Top" Width="231">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="List of Previous Classes" Width="220" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="lblMediumGrade" Content="Medium Grade" HorizontalAlignment="Left" Margin="21,309,0,0" VerticalAlignment="Top"/>
+        <Label Content="Number of absences" HorizontalAlignment="Left" Margin="134,309,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtStudentID" HorizontalAlignment="Left" Height="23" Margin="132,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtStudentName" HorizontalAlignment="Left" Height="23" Margin="132,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtMediumGrade" HorizontalAlignment="Left" Height="23" Margin="28,335,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40"/>
+        <TextBox x:Name="txtNumberOfAbsences" HorizontalAlignment="Left" Height="23" Margin="214,335,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="38"/>
+        <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="177,375,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

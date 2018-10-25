@@ -58,17 +58,25 @@
     <Compile Include="Data\Class.cs" />
     <Compile Include="Data\ClassRoomStudents.cs" />
     <Compile Include="Data\ConnectionInfo.cs" />
+    <Compile Include="Data\Course.cs" />
     <Compile Include="Data\Teacher.cs" />
     <Compile Include="Data\Student.cs" />
     <Compile Include="Data\Users.cs" />
     <Compile Include="Validation\LengthValidation.cs" />
     <Compile Include="Validation\StudentValidation.cs" />
+    <Compile Include="Windows\AcademicDetails.xaml.cs">
+      <DependentUpon>AcademicDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PeopleView.xaml.cs">
       <DependentUpon>PeopleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\AcademicDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Admin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
