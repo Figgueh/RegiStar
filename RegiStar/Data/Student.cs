@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegiStar.Data
 {
-    public class Student : INotifyPropertyChanged
+    public class Student : BaseClass
     {
         //Variables
         private int _studentID;
@@ -23,8 +23,6 @@ namespace RegiStar.Data
         private string _email;
         private string _phone;
         private bool _status;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         //Getters and setters.
         public int StudentID
@@ -151,14 +149,6 @@ namespace RegiStar.Data
                 OnPropertyChanged("FirstName");
                 OnPropertyChanged("LastName");
                 return _firstName + " " + _lastName;
-            }
-        }
-
-        protected void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
 

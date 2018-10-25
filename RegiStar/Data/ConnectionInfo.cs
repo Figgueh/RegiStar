@@ -8,6 +8,6 @@ namespace RegiStar.Data
 {
     public class ConnectionInfo
     {
-        public static string connectionString = "Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True";
+        public static string connectionString = "Data Source=bh213-06\\ipd12;Initial Catalog=wpfRegistar;Integrated Security=True";
     }
 }

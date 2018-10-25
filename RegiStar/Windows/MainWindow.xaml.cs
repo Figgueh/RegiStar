@@ -81,13 +81,13 @@ namespace RegiStar
                                     {
                                         Admin admin = new Admin();
                                         admin.Show();
-                                        this.Hide();
+                                        this.Close();
                                     }
                                     else
                                     {
                                         User user = new User();
                                         user.Show();
-                                        this.Hide();
+                                        this.Close();
                                     }
                                 }
                                 else

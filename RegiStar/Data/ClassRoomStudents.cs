@@ -9,12 +9,10 @@ using RegiStar.Windows;
 
 namespace RegiStar.Data
 {
-    public class ClassRoomStudents : INotifyPropertyChanged
+    public class ClassRoomStudents : BaseClass
     {
         private Class _classRoomID;
         private Student _studentID;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public Class ClassRoomID
         {
@@ -32,14 +30,6 @@ namespace RegiStar.Data
             {
                 _studentID = value;
                 OnPropertyChanged("StudentID");
-            }
-        }
-
-        protected void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
 

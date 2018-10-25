@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegiStar.Data
 {
-    public class Course : INotifyPropertyChanged
+    public class Course : BaseClass
     {
         //Variables.
         private int _courseID;
@@ -18,9 +18,6 @@ namespace RegiStar.Data
         private int _studentID;
         private int _timeID;
 
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         //Getters and Setters
         public int CourseID
@@ -102,14 +99,6 @@ namespace RegiStar.Data
         public override string ToString()
         {
             return String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {5}", CourseID, Name, Description, GradeID, Isbn, StudentID, TimeID);
-        }
-
-        protected void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
         }
     }
 }
