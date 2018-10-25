@@ -18,6 +18,7 @@ namespace RegiStar.ViewModel
         private int _section;
 
 
+
         //Getters and Setters
         public int CourseID
         {

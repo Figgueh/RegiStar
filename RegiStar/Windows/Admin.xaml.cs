@@ -36,13 +36,16 @@ namespace RegiStar.Windows
 
 
             //Get lists.
-            getStudents();
-            getClasses();
+            //getStudents();
+            //getClasses();
 
             //Bind data to controls.
             ddlStudent.ItemsSource = studentList;
             ddlClass.ItemsSource = classList;
         }
+
+
+
 
 
 
