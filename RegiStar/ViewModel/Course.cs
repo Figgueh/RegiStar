@@ -13,10 +13,9 @@ namespace RegiStar.ViewModel
         private int _courseID;
         private string _name;
         private string _description;
-        private int _gradeID;
         private int _isbn;
-        private int _studentID;
-        private int _timeID;
+        private int _teacherID;
+        private int _section;
 
 
         //Getters and Setters
@@ -47,15 +46,6 @@ namespace RegiStar.ViewModel
                 OnPropertyChanged("Description");
             }
         }
-        public int GradeID
-        {
-            get { return this._gradeID; }
-            set
-            {
-                _gradeID = value;
-                OnPropertyChanged("GradeID");
-            }
-        }
         public int Isbn
         {
             get { return this._isbn; }
@@ -65,35 +55,34 @@ namespace RegiStar.ViewModel
                 OnPropertyChanged("Isbn");
             }
         }
-        public int StudentID
+        public int TeacherID
         {
-            get { return this._studentID; }
+            get { return this._teacherID; }
             set
             {
-                _studentID = value;
+                _teacherID = value;
                 OnPropertyChanged("StudentID");
             }
         }
-        public int TimeID
+        public int Section
         {
-            get { return this._timeID; }
+            get { return this._section; }
             set
             {
-                _timeID = value;
+                _section = value;
                 OnPropertyChanged("TimeID");
             }
         }
 
         //Main Course Constructor
-        public Course(int CourseID, string Name, string Description, int GradeID, int Isbn, int StudentID, int TimeID)
+        public Course(int CourseID, string Name, string Description, int Isbn, int TeacherID, int Section)
         {
             _courseID = CourseID;
             _name = Name;
             _description = Description;
-            _gradeID = GradeID;
             _isbn = Isbn;
-            _studentID = StudentID;
-            _timeID = TimeID;
+            _teacherID = TeacherID;
+            _section = Section;
         }
 
         public override string ToString()

@@ -56,7 +56,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\BaseClass.cs" />
-    <Compile Include="ViewModel\Class.cs" />
     <Compile Include="ViewModel\ClassRoomStudents.cs" />
     <Compile Include="ViewModel\ConnectionInfo.cs" />
     <Compile Include="ViewModel\Course.cs" />

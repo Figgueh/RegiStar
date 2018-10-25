@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using RegiStar.Windows;
-using RegiStar.Data;
+using RegiStar.ViewModel;
 
 namespace RegiStar
 {
