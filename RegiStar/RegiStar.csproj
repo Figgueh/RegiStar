@@ -55,13 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\BaseClass.cs" />
-    <Compile Include="Data\Class.cs" />
-    <Compile Include="Data\ClassRoomStudents.cs" />
-    <Compile Include="Data\ConnectionInfo.cs" />
-    <Compile Include="Data\Course.cs" />
-    <Compile Include="Data\Teacher.cs" />
-    <Compile Include="Data\Student.cs" />
+    <Compile Include="ViewModel\BaseClass.cs" />
+    <Compile Include="ViewModel\Class.cs" />
+    <Compile Include="ViewModel\ClassRoomStudents.cs" />
+    <Compile Include="ViewModel\ConnectionInfo.cs" />
+    <Compile Include="ViewModel\Course.cs" />
+    <Compile Include="ViewModel\Teacher.cs" />
+    <Compile Include="ViewModel\Student.cs" />
     <Compile Include="Validation\LengthValidation.cs" />
     <Compile Include="Validation\StudentValidation.cs" />
     <Compile Include="Windows\AcademicDetails.xaml.cs">
@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

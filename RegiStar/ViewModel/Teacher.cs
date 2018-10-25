@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RegiStar.Data
+namespace RegiStar.ViewModel
 {
-    public class Student : BaseClass
+    public class Teacher : BaseClass
     {
         //Variables
-        private int _studentID;
+        private int _teacherID;
         private string _firstName;
         private string _lastName;
         private DateTime _dob;
@@ -25,13 +25,14 @@ namespace RegiStar.Data
         private bool _status;
 
         //Getters and setters.
-        public int StudentID
+        //Getters and setters.
+        public int TeacherID
         {
-            get { return this._studentID; }
+            get { return this._teacherID; }
             set
             {
-                _studentID = value;
-                OnPropertyChanged("StudentID");
+                _teacherID = value;
+                OnPropertyChanged("TeacherID");
             }
         }
         public string FirstName
@@ -152,15 +153,15 @@ namespace RegiStar.Data
             }
         }
 
-        public Student()
+        public Teacher()
         {
 
         }
 
-        //Full Constructor for student.
-        public Student(int studentID, string firstName, string lastName, DateTime dob, DateTime joinDate, string address, string city, string region, string postalcode, string country, string email, string phone, bool status)
+        //Full Constructor for teachers.
+        public Teacher(int teacherID, string firstName, string lastName, DateTime dob, DateTime joinDate, string address, string city, string region, string postalcode, string country, string email, string phone, bool status)
         {
-            _studentID = studentID;
+            _teacherID = teacherID;
             _firstName = firstName;
             _lastName = lastName;
             _dob = dob;
@@ -170,7 +171,7 @@ namespace RegiStar.Data
             _region = region;
             _postalCode = postalcode;
             _country = country;
-            _email = email;
+            Email = email;
             _phone = phone;
             _status = status;
         }

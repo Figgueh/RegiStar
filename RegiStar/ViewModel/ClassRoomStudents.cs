@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RegiStar.Windows;
 
-namespace RegiStar.Data
+namespace RegiStar.ViewModel
 {
     public class ClassRoomStudents : BaseClass
     {
