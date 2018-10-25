@@ -60,39 +60,47 @@ namespace RegiStar.Windows
             //Setup connection to database.
             using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
             {
-                //Open the connection.
-                conn.Open();
-
                 //Create query.
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblClassRooms", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblCourses", conn))
                 {
-
-                    //Setup reader to interpret the data.
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    try
                     {
+                        if (conn == null)
+                            throw new Exception("Couldn't connect to the database. Check the connection string.");
+                        if (cmd == null)
+                            throw new Exception("SQL command error, Please check syntax.");
 
-                        //While reading the data:
-                        while (reader.Read())
+                        //Open the connection.
+                        conn.Open();
+
+                        //Setup reader to interpret the data.
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            //Create a new student with the data.
-                            try
+                            //While reading the data:
+                            while (reader.Read())
                             {
-                                classes = new Class(
-                                Convert.ToInt32(reader["classRoomID"]),
-                                Convert.ToDateTime(reader["classRoomYear"]),
-                                reader["section"].ToString(),
-                                Convert.ToInt32(reader["gradeID"]),
-                                Convert.ToBoolean(reader["status"]),
-                                getTeacher(Convert.ToInt32(reader["teacherID"]))
-                                );
+                                //Create a new student with the data.
+                                tblCours newCours = new tblCours
+                                {
+                                    courseID = Convert.ToInt32(reader["CourseID"]),
+                                    name = reader["name"].ToString(),
+                                    description = reader["description"].ToString(),
+                                    isbn = Convert.ToInt32(reader["isbn"]),
+                                    teacherID = Convert.ToInt32(reader["teacherID"]),
+                                    section = reader["section"].ToString()
+                                };
 
-                                classList.Add(classes);
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Failed to create class");
+                                //Check to see if the course was created, if so add to list.
+                                if (newCours == null)
+                                    throw new Exception("Couldn't create new course based on the data pulled from database.");
+                                else
+                                    classList.Add(classes);
                             }
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("ERROR: " + ex.Message.ToString());
                     }
                 }
             }
