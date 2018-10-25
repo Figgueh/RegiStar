@@ -46,16 +46,16 @@ namespace RegiStar
 
         private void pullUsers(int userID)
         {
-            try
+            //Start a new connection to the server.
+            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
             {
-                //Start a new connection to the server.
-                using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
+                try
                 {
                     //Open the connection.
                     conn.Open();
 
                     //Create query to be executed.
-                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblUsers WHERE userID=" + userID, conn)){
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblUsers WHERE userID=" + userID, conn)) {
 
                         //Open reader to receive values.
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -98,12 +98,18 @@ namespace RegiStar
                         }
                     }
                 }
-            }
 
-            //Catch any of our exception and show them to the user.
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
+
+                //Catch any of our exception and show them to the user.
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
+                finally
+                {
+                    conn.Close();
+                }
             }
         }
 

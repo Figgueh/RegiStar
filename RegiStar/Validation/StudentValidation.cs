@@ -1,4 +1,4 @@
-﻿using RegiStar.Data;
+﻿using RegiStar.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

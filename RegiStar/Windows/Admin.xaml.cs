@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using RegiStar.Data;
+using RegiStar.ViewModel;
+
 
 namespace RegiStar.Windows
 {
@@ -24,12 +15,12 @@ namespace RegiStar.Windows
     {
         //Variables:
         private ObservableCollection<Student> studentList;
-        private ObservableCollection<Class> classList;
+        private ObservableCollection<Course> classList;
         private ObservableCollection<ClassRoomStudents> classStudentList;
 
         //Objects:
         Student student;
-        Class classes;
+        Course classes;
         Teacher teacher;
         ClassRoomStudents classOfStudent;
 
@@ -39,7 +30,7 @@ namespace RegiStar.Windows
         {
             //Initialize lists.
             studentList = new ObservableCollection<Student>();
-            classList = new ObservableCollection<Class>();
+            classList = new ObservableCollection<Course>();
             classStudentList = new ObservableCollection<ClassRoomStudents>();
             InitializeComponent();
 
@@ -77,14 +68,14 @@ namespace RegiStar.Windows
                             //Create a new student with the data.
                             try
                             {
-                                classes = new Class(
-                                Convert.ToInt32(reader["classRoomID"]),
-                                Convert.ToDateTime(reader["classRoomYear"]),
-                                reader["section"].ToString(),
-                                Convert.ToInt32(reader["gradeID"]),
-                                Convert.ToBoolean(reader["status"]),
-                                getTeacher(Convert.ToInt32(reader["teacherID"]))
-                                );
+                                //classes = new Course(
+                                //Convert.ToInt32(reader["classRoomID"]),
+                                //Convert.ToDateTime(reader["classRoomYear"]),
+                                //reader["section"].ToString(),
+                                //Convert.ToInt32(reader["gradeID"]),
+                                //Convert.ToBoolean(reader["status"]),
+                                //getTeacher(Convert.ToInt32(reader["teacherID"]))
+                                //);
 
                                 classList.Add(classes);
                             }
@@ -193,17 +184,17 @@ namespace RegiStar.Windows
 
         private void ddlClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Get the selected item in the dropdown list as a class.
-            Class selectedClass = ddlClass.SelectedItem as Class;
+            ////Get the selected item in the dropdown list as a class.
+            //Course selectedClass = ddlClass.SelectedItem as Course;
 
-            //Pass the classroomID to the function that returns the list of students in that class.
-            getClassStudentList(selectedClass.ClassRoomID);
+            ////Pass the classroomID to the function that returns the list of students in that class.
+            //getClassStudentList(selectedClass.ClassRoomID);
 
-            //Bind it to the listbox.
-            listStudent.ItemsSource = classStudentList;
+            ////Bind it to the listbox.
+            //listStudent.ItemsSource = classStudentList;
 
-            //Show the user the name of the class thats selected.
-            labelClass.Content = getClassName(selectedClass);
+            ////Show the user the name of the class thats selected.
+            //labelClass.Content = getClassName(selectedClass);
 
         }
 
@@ -232,7 +223,7 @@ namespace RegiStar.Windows
 
                             //Get the student ID:
                             int studentID = Convert.ToInt32(reader["studentID"]);
-                            Class classRoom = ddlClass.SelectedItem as Class;
+                            Course classRoom = ddlClass.SelectedItem as Course;
 
 
                             //look in the list of students for the student.
@@ -254,7 +245,7 @@ namespace RegiStar.Windows
         {
             //Add the selected students to the selected list.
             student = ddlStudent.SelectedItem as Student;
-            classes = ddlClass.SelectedItem as Class;
+            classes = ddlClass.SelectedItem as Course;
             classOfStudent = new ClassRoomStudents(classes, student);
 
             //Save to the database.
@@ -267,46 +258,46 @@ namespace RegiStar.Windows
 
         }
 
-        private string getClassName(Class _class)
-        {
-            string className;
-            //Get the GradeID of the class
-            int classGradeID = _class.GradeID;
+        //private string getClassName(Course _class)
+        //{
+            //string className;
+            ////Get the GradeID of the class
+            //int classGradeID = _class.GradeID;
 
-            //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
-            {
-                //Open the connection.
-                conn.Open();
+            ////Setup connection to database.
+            //using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
+            //{
+            //    //Open the connection.
+            //    conn.Open();
 
-                //Create query.
-                using (SqlCommand cmd = new SqlCommand("SELECT name FROM dbo.tblGrades WHERE gradeID=" + classGradeID, conn))
-                {
-                    className = cmd.ExecuteScalar() as string;
-                }
-            }
-            return className;
-        }
+            //    //Create query.
+            //    using (SqlCommand cmd = new SqlCommand("SELECT name FROM dbo.tblGrades WHERE gradeID=" + classGradeID, conn))
+            //    {
+            //        className = cmd.ExecuteScalar() as string;
+            //    }
+            //}
+            //return className;
+        //}
 
         private void save(ClassRoomStudents classOfStudent)
         {
-            //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
-            {
-                //Open the connection.
-                conn.Open();
+            ////Setup connection to database.
+            //using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
+            //{
+            //    //Open the connection.
+            //    conn.Open();
 
-                //Create query.
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO dbo.tblClassRoomStudents(classRoomID, studentID) VALUES(@ClassRoomID, @StudentID)", conn))
-                {
-                    //Create the Parameters
-                    cmd.Parameters.AddWithValue("@ClassRoomID", classOfStudent.ClassRoomID.ClassRoomID);
-                    cmd.Parameters.AddWithValue("@StudentID", classOfStudent.StudentID.StudentID);
+            //    //Create query.
+            //    using (SqlCommand cmd = new SqlCommand("INSERT INTO dbo.tblClassRoomStudents(classRoomID, studentID) VALUES(@ClassRoomID, @StudentID)", conn))
+            //    {
+            //        //Create the Parameters
+            //        cmd.Parameters.AddWithValue("@ClassRoomID", classOfStudent.ClassRoomID.ClassRoomID);
+            //        cmd.Parameters.AddWithValue("@StudentID", classOfStudent.StudentID.StudentID);
 
-                    //Send the Data
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            //        //Send the Data
+            //        cmd.ExecuteNonQuery();
+            //    }
+            //}
         }
 
         private void btnNewStudent_Click(object sender, RoutedEventArgs e)
@@ -339,17 +330,17 @@ namespace RegiStar.Windows
 
         private void btnEditTeacher_Click(object sender, RoutedEventArgs e)
         {
-            //Get the selected item.
-            var selected = listStudent.SelectedValue as ClassRoomStudents;
+            ////Get the selected item.
+            //var selected = listStudent.SelectedValue as ClassRoomStudents;
 
-            //Pull the class from the selected item.
-            Class selectedClass = selected.ClassRoomID;
+            ////Pull the class from the selected item.
+            //Course selectedClass = selected.ClassRoomID;
 
-            //Pull the teacher from the selected class
-            Teacher selectedTeacher = selectedClass.Teacher;
+            ////Pull the teacher from the selected class
+            //Teacher selectedTeacher = selectedClass.Teacher;
 
-            PeopleView teacherView = new PeopleView(selectedTeacher);
-            teacherView.Show();
+            //PeopleView teacherView = new PeopleView(selectedTeacher);
+            //teacherView.Show();
         }
     }
 }

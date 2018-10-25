@@ -11,10 +11,10 @@ namespace RegiStar.ViewModel
 {
     public class ClassRoomStudents : BaseClass
     {
-        private Class _classRoomID;
+        private Course _classRoomID;
         private Student _studentID;
 
-        public Class ClassRoomID
+        public Course ClassRoomID
         {
             get { return this._classRoomID; }
             set
@@ -34,7 +34,7 @@ namespace RegiStar.ViewModel
         }
 
 
-        public ClassRoomStudents(Class classRoomID, Student studentID)
+        public ClassRoomStudents(Course classRoomID, Student studentID)
         {
             _classRoomID = classRoomID;
             _studentID = studentID;

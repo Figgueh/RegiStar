@@ -1,19 +1,6 @@
-﻿using RegiStar.Data;
-using System;
-using System.Collections.Generic;
+﻿using RegiStar.ViewModel;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using RegiStar.Data;
 using System.Data.SqlClient;
 
 namespace RegiStar.Windows
@@ -73,15 +60,15 @@ namespace RegiStar.Windows
                             //Create a new student with the data.
                             try
                             {
-                                courses = new Course(
-                                Convert.ToInt32(reader["courseID"]),
-                                reader["name"].ToString(),
-                                reader["description"].ToString(),
-                                Convert.ToInt32(reader["gradeID"]),
-                                Convert.ToInt32(reader["isbn"]),
-                                Convert.ToInt32(reader["studentID"]),
-                                Convert.ToInt32(reader["timeID"])
-                                );
+                                //courses = new Course(
+                                //Convert.ToInt32(reader["courseID"]),
+                                //reader["name"].ToString(),
+                                //reader["description"].ToString(),
+                                //Convert.ToInt32(reader["gradeID"]),
+                                //Convert.ToInt32(reader["isbn"]),
+                                //Convert.ToInt32(reader["studentID"]),
+                                //Convert.ToInt32(reader["timeID"])
+                                //);
 
                                 coursesList.Add(courses);
                             }
