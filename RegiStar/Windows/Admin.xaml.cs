@@ -58,7 +58,7 @@ namespace RegiStar.Windows
         private void getClasses()
         {
             //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
             {
                 //Open the connection.
                 conn.Open();
@@ -101,7 +101,7 @@ namespace RegiStar.Windows
         private Teacher getTeacher(int teacherID)
         {
             //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
             {
                 //Open the connection.
                 conn.Open();
@@ -143,7 +143,7 @@ namespace RegiStar.Windows
         public void getStudents()
         {
             //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
             {
                 //Open the connection.
                 conn.Open();
@@ -213,7 +213,7 @@ namespace RegiStar.Windows
             classStudentList = new ObservableCollection<ClassRoomStudents>();
 
             //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
             {
                 //Open the connection.
                 conn.Open();
@@ -274,7 +274,7 @@ namespace RegiStar.Windows
             int classGradeID = _class.GradeID;
 
             //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
             {
                 //Open the connection.
                 conn.Open();
@@ -291,7 +291,7 @@ namespace RegiStar.Windows
         private void save(ClassRoomStudents classOfStudent)
         {
             //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
             {
                 //Open the connection.
                 conn.Open();
