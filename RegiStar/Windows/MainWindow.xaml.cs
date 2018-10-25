@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using RegiStar.Windows;
+using RegiStar.Data;
 
 namespace RegiStar
 {
@@ -48,7 +49,7 @@ namespace RegiStar
             try
             {
                 //Start a new connection to the server.
-                using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
                 {
                     //Open the connection.
                     conn.Open();

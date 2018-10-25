@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\Class.cs" />
     <Compile Include="Data\ClassRoomStudents.cs" />
+    <Compile Include="Data\ConnectionInfo.cs" />
     <Compile Include="Data\Teacher.cs" />
     <Compile Include="Data\Student.cs" />
     <Compile Include="Data\Users.cs" />
