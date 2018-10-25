@@ -1,0 +1,763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="wpfRegistarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblAttendances">
+          <Key>
+            <PropertyRef Name="attendanceID" />
+          </Key>
+          <Property Name="attendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="attendanceDate" Type="date" Nullable="false" />
+          <Property Name="studentID" Type="int" Nullable="false" />
+          <Property Name="courseID" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="remarks" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tblBooks">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="author" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="synopsis" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'wpfRegistar.dbo.tblClassRoomStudents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblClassRoomStudents">
+          <Key>
+            <PropertyRef Name="courseID" />
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="courseID" Type="int" Nullable="false" />
+          <Property Name="studentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCourseDetails">
+          <Key>
+            <PropertyRef Name="courseDetail" />
+          </Key>
+          <Property Name="courseDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseID" Type="int" Nullable="false" />
+          <Property Name="start" Type="datetime" Nullable="false" />
+          <Property Name="finish" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCourses">
+          <Key>
+            <PropertyRef Name="courseID" />
+          </Key>
+          <Property Name="courseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="teacherID" Type="int" Nullable="false" />
+          <Property Name="section" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblGrades">
+          <Key>
+            <PropertyRef Name="gradeID" />
+          </Key>
+          <Property Name="gradeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentID" Type="int" Nullable="false" />
+          <Property Name="courseID" Type="int" Nullable="false" />
+          <Property Name="grade" Type="int" Nullable="false" />
+          <Property Name="teacherComments" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tblStudents">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="studentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="dob" Type="date" Nullable="false" />
+          <Property Name="joinDate" Type="date" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="region" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="postalCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblTeachers">
+          <Key>
+            <PropertyRef Name="teacherID" />
+          </Key>
+          <Property Name="teacherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="dob" Type="date" Nullable="false" />
+          <Property Name="joinDate" Type="date" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="region" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="postalCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblUsers">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="userAccess" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="Fk_tblAttendances_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="1" />
+          <End Role="tblAttendances" Type="Self.tblAttendances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="tblAttendances">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblAttendances_tblStudents">
+          <End Role="tblStudents" Type="Self.tblStudents" Multiplicity="1" />
+          <End Role="tblAttendances" Type="Self.tblAttendances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudents">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="tblAttendances">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblClassRoomStudents_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="1" />
+          <End Role="tblClassRoomStudents" Type="Self.tblClassRoomStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="tblClassRoomStudents">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblClassRoomStudents_tblStudents">
+          <End Role="tblStudents" Type="Self.tblStudents" Multiplicity="1" />
+          <End Role="tblClassRoomStudents" Type="Self.tblClassRoomStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudents">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="tblClassRoomStudents">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblCourseDetails_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="1" />
+          <End Role="tblCourseDetails" Type="Self.tblCourseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="tblCourseDetails">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblCourses_tblBooks">
+          <End Role="tblBooks" Type="Self.tblBooks" Multiplicity="1" />
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooks">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="tblCourses">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblCourses_tblTeachers">
+          <End Role="tblTeachers" Type="Self.tblTeachers" Multiplicity="1" />
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTeachers">
+              <PropertyRef Name="teacherID" />
+            </Principal>
+            <Dependent Role="tblCourses">
+              <PropertyRef Name="teacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblGrades_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="1" />
+          <End Role="tblGrades" Type="Self.tblGrades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="tblGrades">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblGrades_tblStudents">
+          <End Role="tblStudents" Type="Self.tblStudents" Multiplicity="1" />
+          <End Role="tblGrades" Type="Self.tblGrades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudents">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="tblGrades">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblStudents_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+          <End Role="tblStudents" Type="Self.tblStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tblStudents">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblTeachers_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+          <End Role="tblTeachers" Type="Self.tblTeachers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tblTeachers">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wpfRegistarModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAttendances" EntityType="Self.tblAttendances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBooks" EntityType="Self.tblBooks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCourseDetails" EntityType="Self.tblCourseDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCourses" EntityType="Self.tblCourses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGrades" EntityType="Self.tblGrades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStudents" EntityType="Self.tblStudents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTeachers" EntityType="Self.tblTeachers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblClassRoomStudents" EntityType="Self.tblClassRoomStudents" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblClassRoomStudents].[courseID] AS [courseID], 
+    [tblClassRoomStudents].[studentID] AS [studentID]
+    FROM [dbo].[tblClassRoomStudents] AS [tblClassRoomStudents]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="Fk_tblAttendances_tblCourses" Association="Self.Fk_tblAttendances_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblAttendances" EntitySet="tblAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblAttendances_tblStudents" Association="Self.Fk_tblAttendances_tblStudents">
+            <End Role="tblStudents" EntitySet="tblStudents" />
+            <End Role="tblAttendances" EntitySet="tblAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblClassRoomStudents_tblCourses" Association="Self.Fk_tblClassRoomStudents_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblClassRoomStudents" EntitySet="tblClassRoomStudents" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblClassRoomStudents_tblStudents" Association="Self.Fk_tblClassRoomStudents_tblStudents">
+            <End Role="tblStudents" EntitySet="tblStudents" />
+            <End Role="tblClassRoomStudents" EntitySet="tblClassRoomStudents" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblCourseDetails_tblCourses" Association="Self.Fk_tblCourseDetails_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblCourseDetails" EntitySet="tblCourseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblCourses_tblBooks" Association="Self.Fk_tblCourses_tblBooks">
+            <End Role="tblBooks" EntitySet="tblBooks" />
+            <End Role="tblCourses" EntitySet="tblCourses" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblCourses_tblTeachers" Association="Self.Fk_tblCourses_tblTeachers">
+            <End Role="tblTeachers" EntitySet="tblTeachers" />
+            <End Role="tblCourses" EntitySet="tblCourses" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblGrades_tblCourses" Association="Self.Fk_tblGrades_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblGrades" EntitySet="tblGrades" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblGrades_tblStudents" Association="Self.Fk_tblGrades_tblStudents">
+            <End Role="tblStudents" EntitySet="tblStudents" />
+            <End Role="tblGrades" EntitySet="tblGrades" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblStudents_tblUsers" Association="Self.Fk_tblStudents_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblStudents" EntitySet="tblStudents" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblTeachers_tblUsers" Association="Self.Fk_tblTeachers_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblTeachers" EntitySet="tblTeachers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wpfRegistarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblAttendance">
+          <Key>
+            <PropertyRef Name="attendanceID" />
+          </Key>
+          <Property Name="attendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="attendanceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="studentID" Type="Int32" Nullable="false" />
+          <Property Name="courseID" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCours" Relationship="Self.Fk_tblAttendances_tblCourses" FromRole="tblAttendances" ToRole="tblCourses" />
+          <NavigationProperty Name="tblStudent" Relationship="Self.Fk_tblAttendances_tblStudents" FromRole="tblAttendances" ToRole="tblStudents" />
+        </EntityType>
+        <EntityType Name="tblBook">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="synopsis" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCourses" Relationship="Self.Fk_tblCourses_tblBooks" FromRole="tblBooks" ToRole="tblCourses" />
+        </EntityType>
+        <EntityType Name="tblCourseDetail">
+          <Key>
+            <PropertyRef Name="courseDetail" />
+          </Key>
+          <Property Name="courseDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseID" Type="Int32" Nullable="false" />
+          <Property Name="start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="finish" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblCours" Relationship="Self.Fk_tblCourseDetails_tblCourses" FromRole="tblCourseDetails" ToRole="tblCourses" />
+        </EntityType>
+        <EntityType Name="tblCours">
+          <Key>
+            <PropertyRef Name="courseID" />
+          </Key>
+          <Property Name="courseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="teacherID" Type="Int32" Nullable="false" />
+          <Property Name="section" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAttendances" Relationship="Self.Fk_tblAttendances_tblCourses" FromRole="tblCourses" ToRole="tblAttendances" />
+          <NavigationProperty Name="tblBook" Relationship="Self.Fk_tblCourses_tblBooks" FromRole="tblCourses" ToRole="tblBooks" />
+          <NavigationProperty Name="tblCourseDetails" Relationship="Self.Fk_tblCourseDetails_tblCourses" FromRole="tblCourses" ToRole="tblCourseDetails" />
+          <NavigationProperty Name="tblTeacher" Relationship="Self.Fk_tblCourses_tblTeachers" FromRole="tblCourses" ToRole="tblTeachers" />
+          <NavigationProperty Name="tblGrades" Relationship="Self.Fk_tblGrades_tblCourses" FromRole="tblCourses" ToRole="tblGrades" />
+          <NavigationProperty Name="tblStudents" Relationship="Self.tblClassRoomStudents" FromRole="tblCourses" ToRole="tblStudents" />
+        </EntityType>
+        <EntityType Name="tblGrade">
+          <Key>
+            <PropertyRef Name="gradeID" />
+          </Key>
+          <Property Name="gradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentID" Type="Int32" Nullable="false" />
+          <Property Name="courseID" Type="Int32" Nullable="false" />
+          <Property Name="grade" Type="Int32" Nullable="false" />
+          <Property Name="teacherComments" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCours" Relationship="Self.Fk_tblGrades_tblCourses" FromRole="tblGrades" ToRole="tblCourses" />
+          <NavigationProperty Name="tblStudent" Relationship="Self.Fk_tblGrades_tblStudents" FromRole="tblGrades" ToRole="tblStudents" />
+        </EntityType>
+        <EntityType Name="tblStudent">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="studentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="joinDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="tblAttendances" Relationship="Self.Fk_tblAttendances_tblStudents" FromRole="tblStudents" ToRole="tblAttendances" />
+          <NavigationProperty Name="tblGrades" Relationship="Self.Fk_tblGrades_tblStudents" FromRole="tblStudents" ToRole="tblGrades" />
+          <NavigationProperty Name="tblUser" Relationship="Self.Fk_tblStudents_tblUsers" FromRole="tblStudents" ToRole="tblUsers" />
+          <NavigationProperty Name="tblCourses" Relationship="Self.tblClassRoomStudents" FromRole="tblStudents" ToRole="tblCourses" />
+        </EntityType>
+        <EntityType Name="tblTeacher">
+          <Key>
+            <PropertyRef Name="teacherID" />
+          </Key>
+          <Property Name="teacherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="joinDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="tblCourses" Relationship="Self.Fk_tblCourses_tblTeachers" FromRole="tblTeachers" ToRole="tblCourses" />
+          <NavigationProperty Name="tblUser" Relationship="Self.Fk_tblTeachers_tblUsers" FromRole="tblTeachers" ToRole="tblUsers" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userAccess" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblStudents" Relationship="Self.Fk_tblStudents_tblUsers" FromRole="tblUsers" ToRole="tblStudents" />
+          <NavigationProperty Name="tblTeachers" Relationship="Self.Fk_tblTeachers_tblUsers" FromRole="tblUsers" ToRole="tblTeachers" />
+        </EntityType>
+        <Association Name="Fk_tblAttendances_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCours" Multiplicity="1" />
+          <End Role="tblAttendances" Type="Self.tblAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="tblAttendances">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblAttendances_tblStudents">
+          <End Role="tblStudents" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblAttendances" Type="Self.tblAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudents">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="tblAttendances">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblCourses_tblBooks">
+          <End Role="tblBooks" Type="Self.tblBook" Multiplicity="1" />
+          <End Role="tblCourses" Type="Self.tblCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooks">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="tblCourses">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblCourseDetails_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCours" Multiplicity="1" />
+          <End Role="tblCourseDetails" Type="Self.tblCourseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="tblCourseDetails">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblCourses_tblTeachers">
+          <End Role="tblTeachers" Type="Self.tblTeacher" Multiplicity="1" />
+          <End Role="tblCourses" Type="Self.tblCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTeachers">
+              <PropertyRef Name="teacherID" />
+            </Principal>
+            <Dependent Role="tblCourses">
+              <PropertyRef Name="teacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblGrades_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCours" Multiplicity="1" />
+          <End Role="tblGrades" Type="Self.tblGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="tblGrades">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblGrades_tblStudents">
+          <End Role="tblStudents" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblGrades" Type="Self.tblGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudents">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="tblGrades">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblStudents_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblStudents" Type="Self.tblStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tblStudents">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_tblTeachers_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblTeachers" Type="Self.tblTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tblTeachers">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblClassRoomStudents">
+          <End Role="tblCourses" Type="Self.tblCours" Multiplicity="*" />
+          <End Role="tblStudents" Type="Self.tblStudent" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="wpfRegistarData" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tblAttendances" EntityType="Self.tblAttendance" />
+          <EntitySet Name="tblBooks" EntityType="Self.tblBook" />
+          <EntitySet Name="tblCourseDetails" EntityType="Self.tblCourseDetail" />
+          <EntitySet Name="tblCourses" EntityType="Self.tblCours" />
+          <EntitySet Name="tblGrades" EntityType="Self.tblGrade" />
+          <EntitySet Name="tblStudents" EntityType="Self.tblStudent" />
+          <EntitySet Name="tblTeachers" EntityType="Self.tblTeacher" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="Fk_tblAttendances_tblCourses" Association="Self.Fk_tblAttendances_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblAttendances" EntitySet="tblAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblAttendances_tblStudents" Association="Self.Fk_tblAttendances_tblStudents">
+            <End Role="tblStudents" EntitySet="tblStudents" />
+            <End Role="tblAttendances" EntitySet="tblAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblCourses_tblBooks" Association="Self.Fk_tblCourses_tblBooks">
+            <End Role="tblBooks" EntitySet="tblBooks" />
+            <End Role="tblCourses" EntitySet="tblCourses" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblCourseDetails_tblCourses" Association="Self.Fk_tblCourseDetails_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblCourseDetails" EntitySet="tblCourseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblCourses_tblTeachers" Association="Self.Fk_tblCourses_tblTeachers">
+            <End Role="tblTeachers" EntitySet="tblTeachers" />
+            <End Role="tblCourses" EntitySet="tblCourses" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblGrades_tblCourses" Association="Self.Fk_tblGrades_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblGrades" EntitySet="tblGrades" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblGrades_tblStudents" Association="Self.Fk_tblGrades_tblStudents">
+            <End Role="tblStudents" EntitySet="tblStudents" />
+            <End Role="tblGrades" EntitySet="tblGrades" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblStudents_tblUsers" Association="Self.Fk_tblStudents_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblStudents" EntitySet="tblStudents" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_tblTeachers_tblUsers" Association="Self.Fk_tblTeachers_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblTeachers" EntitySet="tblTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="tblClassRoomStudents" Association="Self.tblClassRoomStudents">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblStudents" EntitySet="tblStudents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wpfRegistarModelStoreContainer" CdmEntityContainer="wpfRegistarData">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="wpfRegistarModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAttendances">
+            <EntityTypeMapping TypeName="wpfRegistarModel.tblAttendance">
+              <MappingFragment StoreEntitySet="tblAttendances">
+                <ScalarProperty Name="attendanceID" ColumnName="attendanceID" />
+                <ScalarProperty Name="attendanceDate" ColumnName="attendanceDate" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="courseID" ColumnName="courseID" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBooks">
+            <EntityTypeMapping TypeName="wpfRegistarModel.tblBook">
+              <MappingFragment StoreEntitySet="tblBooks">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="synopsis" ColumnName="synopsis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCourseDetails">
+            <EntityTypeMapping TypeName="wpfRegistarModel.tblCourseDetail">
+              <MappingFragment StoreEntitySet="tblCourseDetails">
+                <ScalarProperty Name="courseDetail" ColumnName="courseDetail" />
+                <ScalarProperty Name="courseID" ColumnName="courseID" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="finish" ColumnName="finish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCourses">
+            <EntityTypeMapping TypeName="wpfRegistarModel.tblCours">
+              <MappingFragment StoreEntitySet="tblCourses">
+                <ScalarProperty Name="courseID" ColumnName="courseID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="teacherID" ColumnName="teacherID" />
+                <ScalarProperty Name="section" ColumnName="section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGrades">
+            <EntityTypeMapping TypeName="wpfRegistarModel.tblGrade">
+              <MappingFragment StoreEntitySet="tblGrades">
+                <ScalarProperty Name="gradeID" ColumnName="gradeID" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="courseID" ColumnName="courseID" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="teacherComments" ColumnName="teacherComments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStudents">
+            <EntityTypeMapping TypeName="wpfRegistarModel.tblStudent">
+              <MappingFragment StoreEntitySet="tblStudents">
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="joinDate" ColumnName="joinDate" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTeachers">
+            <EntityTypeMapping TypeName="wpfRegistarModel.tblTeacher">
+              <MappingFragment StoreEntitySet="tblTeachers">
+                <ScalarProperty Name="teacherID" ColumnName="teacherID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="joinDate" ColumnName="joinDate" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="wpfRegistarModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userAccess" ColumnName="userAccess" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tblClassRoomStudents" TypeName="wpfRegistarModel.tblClassRoomStudents" StoreEntitySet="tblClassRoomStudents">
+            <EndProperty Name="tblCourses">
+              <ScalarProperty Name="courseID" ColumnName="courseID" />
+            </EndProperty>
+            <EndProperty Name="tblStudents">
+              <ScalarProperty Name="studentID" ColumnName="studentID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

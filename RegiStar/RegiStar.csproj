@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +70,48 @@
     <Compile Include="Data\Teacher.cs" />
     <Compile Include="Data\Student.cs" />
     <Compile Include="Data\Users.cs" />
+    <Compile Include="RegistarModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistarModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegistarModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegistarModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistarModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblAttendance.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblBook.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCours.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCourseDetail.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblGrade.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStudent.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblTeacher.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblUser.cs">
+      <DependentUpon>RegistarModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Validation\LengthValidation.cs" />
     <Compile Include="Validation\StudentValidation.cs" />
     <Compile Include="Windows\PeopleView.xaml.cs">
@@ -115,14 +166,36 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="RegistarModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RegistarModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="RegistarModel.edmx.diagram">
+      <DependentUpon>RegistarModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RegistarModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RegistarModel.edmx</DependentUpon>
+      <LastGenOutput>RegistarModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="RegistarModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RegistarModel.edmx</DependentUpon>
+      <LastGenOutput>RegistarModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
