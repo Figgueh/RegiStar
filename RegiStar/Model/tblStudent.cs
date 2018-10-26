@@ -8,8 +8,6 @@ namespace RegiStar.Model
 
     public partial class tblStudent
     {
-        private string _fullName;
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblStudent()
         {
@@ -66,8 +64,6 @@ namespace RegiStar.Model
         public string email { get; set; }
 
         public bool? status { get; set; }
-
-
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAttendance> tblAttendances { get; set; }

@@ -79,7 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\RegistarModel.cs" />
+    <Compile Include="Model\RegiStarModel.cs" />
     <Compile Include="Model\tblAttendance.cs" />
     <Compile Include="Model\tblBook.cs" />
     <Compile Include="Model\tblCours.cs" />
