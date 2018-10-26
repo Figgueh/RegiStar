@@ -5,10 +5,10 @@ namespace RegiStar.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class RegiStarModel : DbContext
+    public partial class MainModel : DbContext
     {
-        public RegiStarModel()
-            : base("name=wpfRegistar")
+        public MainModel()
+            : base("name=RegistarMainModel")
         {
         }
 

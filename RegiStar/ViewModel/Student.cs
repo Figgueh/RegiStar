@@ -154,6 +154,21 @@ namespace RegiStar.ViewModel
             }
         }
 
+        public Student(tblStudent newStudent)
+        {
+            _studentID = newStudent.studentID;
+            _firstName = newStudent.firstName;
+            _lastName = newStudent.lastName;
+            _dob = newStudent.dob;
+            _joinDate = newStudent.joinDate;
+            _city = newStudent.city;
+            _region = newStudent.region;
+            _postalCode = newStudent.postalCode;
+            _country = newStudent.country;
+            _email = newStudent.email;
+            _phone = newStudent.phone;
+        }
+
         public Student()
         {
 

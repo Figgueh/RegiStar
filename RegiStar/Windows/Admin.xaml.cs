@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using RegiStar.Model;
 using RegiStar.ViewModel;
-
 
 namespace RegiStar.Windows
 {
@@ -16,6 +11,15 @@ namespace RegiStar.Windows
     /// </summary>
     public partial class Admin : Window
     {
+        //https://github.com/johnpapa/CodeCamper/blob/master/CodeCamper.Data/EFRepository.cs
+        //Repo for managing list.
+
+        //https://www.dofactory.com
+        //For Design Pattern
+
+        //snoop wpf
+        //For WPF decompiler.
+
         public static List<tblStudent> studentList;
         public static List<tblCours> courseList;
         public static List<tblStudent> studentsInClass;
@@ -42,7 +46,7 @@ namespace RegiStar.Windows
         /// <returns> The list of all the students in the database. </returns>
         public List<tblStudent> getStudentNames()
         {
-            using (RegiStarModel dbInfo = new RegiStarModel())
+            using (MainModel dbInfo = new MainModel())
             {
                 //Fetech the students.
                 var query = dbInfo.tblStudents.ToList<tblStudent>();
@@ -62,7 +66,7 @@ namespace RegiStar.Windows
         /// <returns> The list of all the courses in the database. </returns>
         public List<tblCours> getClasses()
         {
-            using (RegiStarModel dbInfo = new RegiStarModel())
+            using (MainModel dbInfo = new MainModel())
             {
                 //Fetech the courses.
                 var query = dbInfo.tblCourses.ToList<tblCours>();
@@ -75,6 +79,28 @@ namespace RegiStar.Windows
             return courseList;
         }
 
+        public void getStudentsInClass()
+        {
+            Course selectedClass = ddlClass.SelectedValue as Course;
+
+            //Try to add the selected student into the selected class list.
+            using (MainModel dbInfo = new MainModel())
+            {
+               var query = from c in dbInfo.tblCourses                            
+                            where(c.courseID == selectedClass.CourseID)
+                            select c.tblStudents;
+
+                foreach(var student in query)
+                {
+                    //studentsInClass.Add(new Student(student));
+                }
+
+            }
+            listStudent.ItemsSource = studentsInClass;
+        }
+
+
+
         /// <summary>
         /// This function gets the values selected in the dropdown list,
         /// then adds the selected student in the class list for the selected class.
@@ -84,21 +110,18 @@ namespace RegiStar.Windows
         private void btnAddStudent_Click(object sender, RoutedEventArgs e)
         {
             //Get the selected values in the dropdown list.
-            tblCours selectedClass = ddlClass.SelectedValue as tblCours;
-            var selectedStudent = ddlStudent.SelectedValue as tblStudent;
-
-            //Try to add the selected student into the selected class list.
-            using(RegiStarModel dbInfo = new RegiStarModel())
-            {
-                var query = dbInfo.tblCourses
-                    .Where(i => i.courseID == selectedClass.courseID)
-                    .Select(l => l.tblStudents.ToList());
-
-                //studentsInClass = new List<tblStudent>(query);
-            }
+            Course selectedClass = ddlClass.SelectedValue as Course;
+            Student selectedStudent = ddlStudent.SelectedValue as Student;
 
 
 
+
+
+        }
+
+        private void ddlClass_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            getStudentsInClass();
         }
     }
 }
