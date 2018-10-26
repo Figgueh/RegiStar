@@ -79,7 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\MainModel.cs" />
+    <Compile Include="Model\RegistarModel.cs" />
     <Compile Include="Model\tblAttendance.cs" />
     <Compile Include="Model\tblBook.cs" />
     <Compile Include="Model\tblCours.cs" />
@@ -96,6 +96,7 @@
     <Compile Include="ViewModel\Student.cs" />
     <Compile Include="Validation\LengthValidation.cs" />
     <Compile Include="Validation\StudentValidation.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="Windows\AcademicDetails.xaml.cs">
       <DependentUpon>AcademicDetails.xaml</DependentUpon>
     </Compile>

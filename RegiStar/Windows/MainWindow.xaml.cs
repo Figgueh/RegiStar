@@ -1,6 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Data.SqlClient;
 using RegiStar.Windows;
+using RegiStar.ViewModel;
 using RegiStar.Model;
 
 namespace RegiStar
@@ -19,7 +33,7 @@ namespace RegiStar
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using(var db = new MainModel())
+            using(var db = new RegistarModel())
             {
                 try
                 {
@@ -39,7 +53,7 @@ namespace RegiStar
                     }
                     else
                     {
-                        User user = new User();
+                        User user = new User(userinfo);
                         user.Show();
                         this.Close();
                     }

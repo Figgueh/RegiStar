@@ -1,7 +1,20 @@
-﻿using RegiStar.ViewModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using System.Data.SqlClient;
+using RegiStar.ViewModel;
+using RegiStar.Model;
 
 namespace RegiStar.Windows
 {
@@ -16,79 +29,28 @@ namespace RegiStar.Windows
 
     public partial class User : Window
     {
-
-        //Variables:
-        private ObservableCollection<Course> coursesList;
-
-        //Objects:
-        Course courses;
+        
+        private void Init()
+        {
+            InitializeComponent();
+            this.DataContext = new UserViewModel();
+        }
 
         public User()
         {
-            InitializeComponent();
-            coursesList = new ObservableCollection<Course>();
-
-
-            //Get lists.
-            getCourses();
-
-            //Bind data to controls.
-            lstListOfClasses.ItemsSource = coursesList;
+            Init();
         }
 
-
-
-        private void getCourses()
+        public User(tblUser userinfo)
         {
-            //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-LSPNA6P;Initial Catalog=wpfRegistar;Integrated Security=True"))
-            {
-                //Open the connection.
-                conn.Open();
-
-                //Create query.
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblCourses", conn))
-                {
-
-                    //Setup reader to interpret the data.
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-
-                        //While reading the data:
-                        while (reader.Read())
-                        {
-                            //Create a new student with the data.
-                            try
-                            {
-                                //courses = new Course(
-                                //Convert.ToInt32(reader["courseID"]),
-                                //reader["name"].ToString(),
-                                //reader["description"].ToString(),
-                                //Convert.ToInt32(reader["gradeID"]),
-                                //Convert.ToInt32(reader["isbn"]),
-                                //Convert.ToInt32(reader["studentID"]),
-                                //Convert.ToInt32(reader["timeID"])
-                                //);
-
-                                coursesList.Add(courses);
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Failed to create course");
-                            }
-                        }
-                    }
-                }
-            }
+            Init();
+            ((UserViewModel)this.DataContext).userinfo = userinfo;
         }
-
-
-
-
 
         private void btnAddStudent_Click(object sender, RoutedEventArgs e)
         {
-
+            var context = (UserViewModel)this.DataContext;
+            context.addCourse();
         }
 
         private void btnAcademicDetails_Click(object sender, RoutedEventArgs e)
@@ -98,12 +60,31 @@ namespace RegiStar.Windows
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnRemoveClass_Click(object sender, RoutedEventArgs e)
+        {
+           // selectedCoursesList.Remove(lstSelectedClasses.SelectedValue as Course);
+        }
+
+        private void btnRemoveAll_Click(object sender, RoutedEventArgs e)
+        {
+
+          //  selectedCoursesList = new ObservableCollection<Course>();
+           // lstSelectedClasses.ItemsSource = selectedCoursesList;
+
+        }
+
+        private void txtUserID_Loaded(object sender, RoutedEventArgs e)
+        {
+          //txtUserID.Text = Convert.ToString(userinfo.userID);
+           
         }
     }
 }
