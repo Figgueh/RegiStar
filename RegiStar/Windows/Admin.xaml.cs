@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using RegiStar.Model;
 using RegiStar.ViewModel;
 
 
@@ -13,337 +16,89 @@ namespace RegiStar.Windows
     /// </summary>
     public partial class Admin : Window
     {
-        //Variables:
-        private ObservableCollection<Student> studentList;
-        private ObservableCollection<Course> classList;
-        private ObservableCollection<ClassRoomStudents> classStudentList;
+        public static List<tblStudent> studentList;
+        public static List<tblCours> courseList;
+        public static List<tblStudent> studentsInClass;
 
-        //Objects:
-        Student student;
-        Course classes;
-        Teacher teacher;
-        ClassRoomStudents classOfStudent;
-
-        
 
         public Admin()
         {
-            //Initialize lists.
-            studentList = new ObservableCollection<Student>();
-            classList = new ObservableCollection<Course>();
-            classStudentList = new ObservableCollection<ClassRoomStudents>();
             InitializeComponent();
 
+            //Initialize the list of students for the dropdown list.
+            ddlStudent.ItemsSource = getStudentNames();
+            ddlStudent.DisplayMemberPath = "firstName";
 
-            //Get lists.
-            //getStudents();
-            //getClasses();
+            //Initialize the list of courses for the dropdown list.
+            ddlClass.ItemsSource = getClasses();
+            ddlClass.DisplayMemberPath = "name";
 
-            //Bind data to controls.
-            ddlStudent.ItemsSource = studentList;
-            ddlClass.ItemsSource = classList;
         }
 
-
-
-
-
-
-        private void getClasses()
+        /// <summary>
+        /// This function gets all the students in our table,
+        /// then sends all the information into a list of tblStudents.
+        /// </summary>
+        /// <returns> The list of all the students in the database. </returns>
+        public List<tblStudent> getStudentNames()
         {
-            //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
+            using (RegistarModel dbInfo = new RegistarModel())
             {
-                //Open the connection.
-                conn.Open();
+                //Fetech the students.
+                var query = dbInfo.tblStudents.ToList<tblStudent>();
 
-                //Create query.
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblClassRooms", conn))
-                {
-
-                    //Setup reader to interpret the data.
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-
-                        //While reading the data:
-                        while (reader.Read())
-                        {
-                            //Create a new student with the data.
-                            try
-                            {
-                                //classes = new Course(
-                                //Convert.ToInt32(reader["classRoomID"]),
-                                //Convert.ToDateTime(reader["classRoomYear"]),
-                                //reader["section"].ToString(),
-                                //Convert.ToInt32(reader["gradeID"]),
-                                //Convert.ToBoolean(reader["status"]),
-                                //getTeacher(Convert.ToInt32(reader["teacherID"]))
-                                //);
-
-                                classList.Add(classes);
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Failed to create class");
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private Teacher getTeacher(int teacherID)
-        {
-            //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
-            {
-                //Open the connection.
-                conn.Open();
-
-                //Create query.
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblTeachers WHERE teacherID=" + teacherID, conn))
-                {
-
-                    //Setup reader to interpret the data.
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-
-                        //While reading the data:
-                        while (reader.Read())
-                        {
-                            teacher = new Teacher(
-                                Convert.ToInt32(reader["teacherID"]),
-                                reader["firstName"].ToString(),
-                                reader["lastName"].ToString(),
-                                Convert.ToDateTime(reader["dob"]),
-                                Convert.ToDateTime(reader["joinDate"]),
-                                reader["address"].ToString(),
-                                reader["city"].ToString(),
-                                reader["region"].ToString(),
-                                reader["postalCode"].ToString(),
-                                reader["country"].ToString(),
-                                reader["email"].ToString(),
-                                reader["phone"].ToString(),
-                                Convert.ToBoolean(reader["status"])
-                                );
-                        }
-                    }
-                }
+                //Initialize the list to the list of students
+                studentList = new List<tblStudent>(query);
             }
 
-            return teacher;
+            //return the newly initlaized list.
+            return studentList;
         }
 
-        public void getStudents()
+        /// <summary>
+        /// This function gets all the cources in our table,
+        /// then sends all the information into a list of tblCources.
+        /// </summary>
+        /// <returns> The list of all the courses in the database. </returns>
+        public List<tblCours> getClasses()
         {
-            //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
+            using (RegistarModel dbInfo = new RegistarModel())
             {
-                //Open the connection.
-                conn.Open();
+                //Fetech the courses.
+                var query = dbInfo.tblCourses.ToList<tblCours>();
 
-                //Create query.
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblStudents", conn))
-                {
-
-                    //Setup reader to interpret the data.
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-
-                        //While reading the data:
-                        while (reader.Read())
-                        {
-                            //Create a new student with the data.
-                            try
-                            {
-                                student = new Student(
-                                Convert.ToInt32(reader["studentID"]),
-                                reader["firstName"].ToString(),
-                                reader["lastName"].ToString(),
-                                Convert.ToDateTime(reader["dob"]),
-                                Convert.ToDateTime(reader["joinDate"]),
-                                reader["address"].ToString(),
-                                reader["city"].ToString(),
-                                reader["region"].ToString(),
-                                reader["postalCode"].ToString(),
-                                reader["country"].ToString(),
-                                reader["email"].ToString(),
-                                reader["phone"].ToString(),
-                                Convert.ToBoolean(reader["status"])
-                                );
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Failed to create student");
-                            }
-
-                            //Then add the student to the list of students.
-                            studentList.Add(student);
-                        }
-                    }
-                }
+                //Initialize the list to the list of courses
+                courseList = new List<tblCours>(query);
             }
+
+            //return the newly initlaized list.
+            return courseList;
         }
 
-        private void ddlClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ////Get the selected item in the dropdown list as a class.
-            //Course selectedClass = ddlClass.SelectedItem as Course;
-
-            ////Pass the classroomID to the function that returns the list of students in that class.
-            //getClassStudentList(selectedClass.ClassRoomID);
-
-            ////Bind it to the listbox.
-            //listStudent.ItemsSource = classStudentList;
-
-            ////Show the user the name of the class thats selected.
-            //labelClass.Content = getClassName(selectedClass);
-
-        }
-
-        private void getClassStudentList(int classRoomID)
-        {
-            //Clear the list
-            classStudentList = new ObservableCollection<ClassRoomStudents>();
-
-            //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
-            {
-                //Open the connection.
-                conn.Open();
-
-                //Create query.
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.tblClassRoomStudents WHERE classRoomID=" + classRoomID, conn))
-                {
-
-                    //Setup reader to interpret the data.
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-
-                        //While reading the data:
-                        while (reader.Read())
-                        {
-
-                            //Get the student ID:
-                            int studentID = Convert.ToInt32(reader["studentID"]);
-                            Course classRoom = ddlClass.SelectedItem as Course;
-
-
-                            //look in the list of students for the student.
-                            foreach (Student student in studentList)
-                            {
-                                if(student.StudentID == studentID)
-                                {
-                                    classOfStudent = new ClassRoomStudents(classRoom, student);
-                                    classStudentList.Add(classOfStudent);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        /// <summary>
+        /// This function gets the values selected in the dropdown list,
+        /// then adds the selected student in the class list for the selected class.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            //Add the selected students to the selected list.
-            student = ddlStudent.SelectedItem as Student;
-            classes = ddlClass.SelectedItem as Course;
-            classOfStudent = new ClassRoomStudents(classes, student);
+            //Get the selected values in the dropdown list.
+            tblCours selectedClass = ddlClass.SelectedValue as tblCours;
+            var selectedStudent = ddlStudent.SelectedValue as tblStudent;
 
-            //Save to the database.
-            save(classOfStudent);
+            //Try to add the selected student into the selected class list.
+            using(RegistarModel dbInfo = new RegistarModel())
+            {
+                var query = dbInfo.tblCourses
+                    .Where(i => i.courseID == selectedClass.courseID)
+                    .Select(l => l.tblStudents.ToList());
 
-            classStudentList.Add(classOfStudent);
+                //studentsInClass = new List<tblStudent>(query);
+            }
 
-            //Bind it to the listbox.
-            listStudent.ItemsSource = classStudentList;
 
-        }
 
-        //private string getClassName(Course _class)
-        //{
-            //string className;
-            ////Get the GradeID of the class
-            //int classGradeID = _class.GradeID;
-
-            ////Setup connection to database.
-            //using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
-            //{
-            //    //Open the connection.
-            //    conn.Open();
-
-            //    //Create query.
-            //    using (SqlCommand cmd = new SqlCommand("SELECT name FROM dbo.tblGrades WHERE gradeID=" + classGradeID, conn))
-            //    {
-            //        className = cmd.ExecuteScalar() as string;
-            //    }
-            //}
-            //return className;
-        //}
-
-        private void save(ClassRoomStudents classOfStudent)
-        {
-            ////Setup connection to database.
-            //using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
-            //{
-            //    //Open the connection.
-            //    conn.Open();
-
-            //    //Create query.
-            //    using (SqlCommand cmd = new SqlCommand("INSERT INTO dbo.tblClassRoomStudents(classRoomID, studentID) VALUES(@ClassRoomID, @StudentID)", conn))
-            //    {
-            //        //Create the Parameters
-            //        cmd.Parameters.AddWithValue("@ClassRoomID", classOfStudent.ClassRoomID.ClassRoomID);
-            //        cmd.Parameters.AddWithValue("@StudentID", classOfStudent.StudentID.StudentID);
-
-            //        //Send the Data
-            //        cmd.ExecuteNonQuery();
-            //    }
-            //}
-        }
-
-        private void btnNewStudent_Click(object sender, RoutedEventArgs e)
-        {
-            PeopleView studentView = new PeopleView(new Student());
-            studentView.Show();
-        }
-
-        private void btnEditStudent_Click(object sender, RoutedEventArgs e)
-        {
-            //Get the selected item.
-            var selected = listStudent.SelectedValue as ClassRoomStudents;
-
-            //Pull the student from the selected item.
-            Student selectedStudent = selected.StudentID;
-
-            //Send it to the constructor.
-            PeopleView studentView = new PeopleView(selectedStudent);
-            
-            //Show the window.
-            studentView.Show();
-        }
-
-        private void btnNewTeacher_Click(object sender, RoutedEventArgs e)
-        {
-            PeopleView teacherView = new PeopleView(new Teacher());
-            teacherView.Show();
-
-        }
-
-        private void btnEditTeacher_Click(object sender, RoutedEventArgs e)
-        {
-            ////Get the selected item.
-            //var selected = listStudent.SelectedValue as ClassRoomStudents;
-
-            ////Pull the class from the selected item.
-            //Course selectedClass = selected.ClassRoomID;
-
-            ////Pull the teacher from the selected class
-            //Teacher selectedTeacher = selectedClass.Teacher;
-
-            //PeopleView teacherView = new PeopleView(selectedTeacher);
-            //teacherView.Show();
         }
     }
 }
