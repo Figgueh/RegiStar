@@ -33,7 +33,7 @@ namespace RegiStar
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using(var db = new RegiStarModel())
+            using(var db = new RegistarModel())
             {
                 try
                 {
@@ -53,7 +53,7 @@ namespace RegiStar
                     }
                     else
                     {
-                        User user = new User();
+                        User user = new User(userinfo);
                         user.Show();
                         this.Close();
                     }

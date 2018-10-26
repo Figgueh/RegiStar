@@ -42,7 +42,7 @@ namespace RegiStar.Windows
         /// <returns> The list of all the students in the database. </returns>
         public List<tblStudent> getStudentNames()
         {
-            using (RegiStarModel dbInfo = new RegiStarModel())
+            using (RegistarModel dbInfo = new RegistarModel())
             {
                 //Fetech the students.
                 var query = dbInfo.tblStudents.ToList<tblStudent>();
@@ -62,7 +62,7 @@ namespace RegiStar.Windows
         /// <returns> The list of all the courses in the database. </returns>
         public List<tblCours> getClasses()
         {
-            using (RegiStarModel dbInfo = new RegiStarModel())
+            using (RegistarModel dbInfo = new RegistarModel())
             {
                 //Fetech the courses.
                 var query = dbInfo.tblCourses.ToList<tblCours>();
@@ -88,7 +88,7 @@ namespace RegiStar.Windows
             var selectedStudent = ddlStudent.SelectedValue as tblStudent;
 
             //Try to add the selected student into the selected class list.
-            using(RegiStarModel dbInfo = new RegiStarModel())
+            using(RegistarModel dbInfo = new RegistarModel())
             {
                 var query = dbInfo.tblCourses
                     .Where(i => i.courseID == selectedClass.courseID)

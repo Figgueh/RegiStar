@@ -22,24 +22,30 @@
 
         <!--Add Remoove  Buttons-->
         <Button x:Name="btnAddClass" VerticalAlignment="Center" Margin="46,97,54,272" Grid.Column="1" Grid.Row="0" Content="Add" Click="btnAddStudent_Click"/>
-        <Button x:Name="btnRemoveClass" VerticalAlignment="Center" Margin="46,137,54,232" Grid.Column="1" Grid.Row="0" Content="Remove" Click="btnAddStudent_Click"/>
-        <Button x:Name="btnRemoveAll" VerticalAlignment="Center" Margin="46,229,54,118" Grid.Column="1" Grid.Row="0" Content="Remove All" Click="btnAddStudent_Click" Height="42"/>
-        <ListView x:Name="lstListOfClasses" HorizontalAlignment="Left" Height="304" Margin="23,17,0,0" VerticalAlignment="Top" Width="204">
+        <Button x:Name="btnRemoveClass" VerticalAlignment="Center" Margin="46,137,54,232" Grid.Column="1" Grid.Row="0" Content="Remove" Click="btnRemoveClass_Click" />
+        <Button x:Name="btnRemoveAll" VerticalAlignment="Center" Margin="46,229,54,118" Grid.Column="1" Grid.Row="0" Content="Remove All" Height="42" Click="btnRemoveAll_Click"/>
+        <ListView x:Name="lstListOfClasses" HorizontalAlignment="Left" Height="304" Margin="23,17,0,0" VerticalAlignment="Top" Width="204" ItemsSource="{Binding coursesList}" SelectedItem="{Binding selectedCours, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="List of Classes" Width="180" />
+                    <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding courseID}" />
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding name}"></GridViewColumn>
+
+
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="lstSelectedClasses" HorizontalAlignment="Left" Height="304" Margin="28,17,0,0" VerticalAlignment="Top" Width="204" Grid.Column="2">
+        <ListView x:Name="lstSelectedClasses" HorizontalAlignment="Left" Height="304" Margin="28,17,0,0" VerticalAlignment="Top" Width="204" Grid.Column="2" ItemsSource="{Binding selectedList}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Selected Classes" Width="195"/>
+                    <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding courseID}" />
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding name}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
         <Button x:Name="btnAcademicDetails" Content="Academic Details" HorizontalAlignment="Left" Margin="27,341,0,0" VerticalAlignment="Top" Width="75" Click="btnAcademicDetails_Click"/>
         <Button x:Name="btnCancel" Content="Cancel" Grid.Column="2" HorizontalAlignment="Left" Margin="28,346,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
         <Button x:Name="btnSave" Content="Save" Grid.Column="2" HorizontalAlignment="Left" Margin="157,346,0,0" VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
+        <Label Content="List of Classes" HorizontalAlignment="Left" Margin="81,-6,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtUserID" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="60,17,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Text="{Binding userinfo.userID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>
