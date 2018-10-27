@@ -43,7 +43,7 @@ namespace RegiStar.ViewModel
 
         public ObservableCollection<tblCours> GetCourses()
         {
-            using (var dbInfo = new RegistarModel())
+            using (var dbInfo = new RegistarDbContext())
             {
                 //Fetech the courses.
                 var query = dbInfo.tblCourses.ToList<tblCours>();

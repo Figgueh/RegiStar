@@ -24,7 +24,7 @@ namespace RegiStar.ViewModel
         private string _country;
         private string _email;
         private string _phone;
-        private bool _status;
+        private bool? _status;
 
         //Getters and setters.
         public int StudentID
@@ -135,7 +135,7 @@ namespace RegiStar.ViewModel
                 OnPropertyChanged("Phone");
             }
         }
-        public bool Status
+        public bool? Status
         {
             get { return this._status; }
             set
@@ -167,6 +167,7 @@ namespace RegiStar.ViewModel
             _country = newStudent.country;
             _email = newStudent.email;
             _phone = newStudent.phone;
+            _status = newStudent.status;
         }
 
         public Student()

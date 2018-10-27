@@ -7,6 +7,17 @@
         xmlns:src="clr-namespace:RegiStar.ViewModel"
         mc:Ignorable="d"
         Title="Admin" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Key="ddlStudentNames">
+            <StackPanel FlowDirection="LeftToRight"  Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=FirstName}"></TextBlock>
+                <TextBlock Text=" "></TextBlock>
+                <TextBlock Text="{Binding Path=LastName}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -22,10 +33,10 @@
         </Grid.RowDefinitions>
 
         <!--Student Dropdown list-->
-        <ComboBox x:Name="ddlStudent" VerticalAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0" DisplayMemberPath="FullName" />
+        <ComboBox x:Name="ddlStudent" VerticalAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding studentList}" ItemTemplate="{StaticResource ddlStudentNames}" SelectedItem="{Binding selectedStudentList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!--Class Dropdown list-->
-        <ComboBox x:Name="ddlClass" VerticalAlignment="Center" Margin="10" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Section" SelectedValuePath="ClassRoomID" SelectedValue="{Binding ClassRoomID}" SelectionChanged="ddlClass_SelectionChanged" />
+        <ComboBox x:Name="ddlClass" VerticalAlignment="Center" Margin="10" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding courseList}" DisplayMemberPath="name" SelectedItem="{Binding selectedCourseList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ddlClass_SelectionChanged" />
         
         <!--Add Button-->
         <Button x:Name="btnAddStudent" VerticalAlignment="Center" Margin="50,0,50,0" Grid.Column="2" Grid.Row="0" Content="Add" Click="btnAddStudent_Click"/>
@@ -56,8 +67,17 @@
             </Grid.RowDefinitions>
 
             <!--List for students in a specific class-->
-            <ListBox x:Name="listStudent" SelectedValuePath="{Binding StudentID}" />
-            
+            <ListView x:Name="listStudent" ItemsSource="{Binding studentsInClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Student ID" Width="75" DisplayMemberBinding="{Binding StudentID}" />
+                        <GridViewColumn Header="First Name" Width="200" DisplayMemberBinding="{Binding FullName}" />
+                        <GridViewColumn Header="Email Address" Width="200" DisplayMemberBinding="{Binding Email}" />
+                        <GridViewColumn Header="Phone Number" Width="170" DisplayMemberBinding="{Binding Phone}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
             <!--List control buttons-->
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <Label Margin="5" Content="List Controls:"/>

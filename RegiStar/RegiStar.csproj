@@ -79,7 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\RegistarModel.cs" />
+    <Compile Include="Model\RegistarDbContext.cs" />
     <Compile Include="Model\tblAttendance.cs" />
     <Compile Include="Model\tblBook.cs" />
     <Compile Include="Model\tblCours.cs" />
@@ -88,6 +88,7 @@
     <Compile Include="Model\tblStudent.cs" />
     <Compile Include="Model\tblTeacher.cs" />
     <Compile Include="Model\tblUser.cs" />
+    <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\BaseClass.cs" />
     <Compile Include="ViewModel\ClassRoomStudents.cs" />
     <Compile Include="ViewModel\ConnectionInfo.cs" />
