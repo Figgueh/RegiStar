@@ -90,11 +90,7 @@
     <Compile Include="Model\tblUser.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\BaseClass.cs" />
-    <Compile Include="ViewModel\ClassRoomStudents.cs" />
-    <Compile Include="ViewModel\ConnectionInfo.cs" />
-    <Compile Include="ViewModel\Course.cs" />
-    <Compile Include="ViewModel\Teacher.cs" />
-    <Compile Include="ViewModel\Student.cs" />
+    <Compile Include="ViewModel\PeopleViewModel.cs" />
     <Compile Include="Validation\LengthValidation.cs" />
     <Compile Include="Validation\StudentValidation.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />

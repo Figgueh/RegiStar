@@ -36,9 +36,42 @@ namespace RegiStar.Windows
             listStudent.ItemsSource = AdminView.getStudentsInClass();
         }
 
+        //Add student to classlist.
         private void btnAddStudent_Click(object sender, RoutedEventArgs e)
         {
             AdminView.addStudent();
+            listStudent.ItemsSource = AdminView.getStudentsInClass();
         }
+
+
+        //New student
+        private void btnNewStudent_Click(object sender, RoutedEventArgs e)
+        {
+            PeopleView newStudent = new PeopleView(new tblStudent());
+            newStudent.Show();
+        }
+
+        //Edit Student
+        private void btnEditStudent_Click(object sender, RoutedEventArgs e)
+        {
+            PeopleView editStudent = new PeopleView(AdminView.selectedStudentList);
+            editStudent.Show();
+        }
+
+        //New teacher
+        private void btnNewTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            PeopleView newTeacher = new PeopleView(new tblTeacher());
+            newTeacher.Show();
+        }
+
+        //Edit Teacher
+        private void btnEditTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            PeopleView editTeacher = new PeopleView(AdminView.selectedCourseList.tblTeacher);
+            editTeacher.Show();
+        }
+
+        
     }
 }

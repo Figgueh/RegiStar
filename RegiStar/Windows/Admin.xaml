@@ -11,9 +11,9 @@
     <Window.Resources>
         <DataTemplate x:Key="ddlStudentNames">
             <StackPanel FlowDirection="LeftToRight"  Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=FirstName}"></TextBlock>
+                <TextBlock Text="{Binding Path=firstName}"></TextBlock>
                 <TextBlock Text=" "></TextBlock>
-                <TextBlock Text="{Binding Path=LastName}"></TextBlock>
+                <TextBlock Text="{Binding Path=lastName}"></TextBlock>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
@@ -50,10 +50,10 @@
         <!--Buttons for add new objects-->
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
             <Label VerticalAlignment="Center" Margin="50,0,20,0">Create new :</Label>
-            <Button x:Name="btnNewStudent" Content="Student" VerticalAlignment="Center" Margin="10,0" Width="80" />
+            <Button x:Name="btnNewStudent" Content="Student" VerticalAlignment="Center" Margin="10,0" Width="80" Click="btnNewStudent_Click" />
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="btnNewTeacher" Content="Teacher" VerticalAlignment="Center" Margin="20,0" Width="80"/>
+            <Button x:Name="btnNewTeacher" Content="Teacher" VerticalAlignment="Center" Margin="20,0" Width="80" Click="btnNewTeacher_Click"/>
             <Button Content="Class" VerticalAlignment="Center" Margin="10,0" Width="80"/>
         </StackPanel>
 
@@ -70,10 +70,10 @@
             <ListView x:Name="listStudent" ItemsSource="{Binding studentsInClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Student ID" Width="75" DisplayMemberBinding="{Binding StudentID}" />
-                        <GridViewColumn Header="First Name" Width="200" DisplayMemberBinding="{Binding FullName}" />
-                        <GridViewColumn Header="Email Address" Width="200" DisplayMemberBinding="{Binding Email}" />
-                        <GridViewColumn Header="Phone Number" Width="170" DisplayMemberBinding="{Binding Phone}" />
+                        <GridViewColumn Header="Student ID" Width="75" DisplayMemberBinding="{Binding studentID}" />
+                        <GridViewColumn Header="First Name" Width="200" DisplayMemberBinding="{Binding fullName}" />
+                        <GridViewColumn Header="Email Address" Width="200" DisplayMemberBinding="{Binding email}" />
+                        <GridViewColumn Header="Phone Number" Width="170" DisplayMemberBinding="{Binding phone}" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -83,13 +83,13 @@
                 <Label Margin="5" Content="List Controls:"/>
                 <Button Margin="10,2,10,3" Content="Clear list"/>
                 <Button Margin="10,2,10,3" Content="Remove selected"/>
-                <Button x:Name="btnEditStudent" Margin="10,2,10,3" Content="Edit student" />
+                <Button x:Name="btnEditStudent" Margin="10,2,10,3" Content="Edit student" Click="btnEditStudent_Click" />
                 
                 <!--Class controls-->
                 <Label Margin="5,25,5,5" Content="Class Controls:"/>
                 <Button Margin="10,2,10,3" Content="Edit class"/>
                 <Button Margin="10,2,10,3" Content="Remove class"/>
-                <Button x:Name="btnEditTeacher" Margin="10,2,10,3" Content="Edit teacher"/>
+                <Button x:Name="btnEditTeacher" Margin="10,2,10,3" Content="Edit teacher" Click="btnEditTeacher_Click"/>
             </StackPanel>
         </Grid>
 

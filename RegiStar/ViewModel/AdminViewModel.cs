@@ -29,9 +29,9 @@ namespace RegiStar.ViewModel
         }
 
         //Student list entities:
-        public ObservableCollection<Student> studentList { get; set; }
-        private Student _selectedStudentList;
-        public Student selectedStudentList
+        public ObservableCollection<tblStudent> studentList { get; set; }
+        private tblStudent _selectedStudentList;
+        public tblStudent selectedStudentList
         {
             get
             {
@@ -45,9 +45,9 @@ namespace RegiStar.ViewModel
         }
 
         //entities for the list of students in a class:
-        public ObservableCollection<Student> studentsInClass { get; set; }
-        private Student _selectedStudentsInClass;
-        public Student selectedStudentsInClass
+        public ObservableCollection<tblStudent> studentsInClass { get; set; }
+        private tblStudent _selectedStudentsInClass;
+        public tblStudent selectedStudentsInClass
         {
             get
             {
@@ -68,7 +68,17 @@ namespace RegiStar.ViewModel
 
         public void addStudent()
         {
-            studentsInClass.Add(selectedStudentList);
+            using (RegistarDbContext db = new RegistarDbContext())
+            {
+                var query = db.tblCourses
+                .Select(s => s.tblStudents);
+
+                foreach (var item in query)
+                {
+                    item.Add(selectedStudentList);
+                }
+                db.SaveChanges();
+            }
 
         }
 
@@ -77,10 +87,10 @@ namespace RegiStar.ViewModel
         /// then sends all the information into a list of Students for the listView.
         /// </summary>
         /// <returns></returns>
-        public ObservableCollection<Student> getStudentsInClass()
+        public ObservableCollection<tblStudent> getStudentsInClass()
         {
             //Clear the list.
-            studentsInClass = new ObservableCollection<Student>();
+            studentsInClass = new ObservableCollection<tblStudent>();
 
             //Select the class ID from the dropdown list.
             int selectedClassID = selectedCourseList.courseID;
@@ -89,33 +99,42 @@ namespace RegiStar.ViewModel
             //Get all the students from the selected class.
             using (RegistarDbContext dbInfo = new RegistarDbContext())
             {
-                var list =
-                    from s in dbInfo.tblStudents
-                    from course in s.tblCourses
-                    where course.courseID == selectedClassID
-                    select new Student
-                    {
-                        FirstName = s.firstName,
-                        LastName = s.lastName,
-                        Address = s.address,
-                        City = s.city,
-                        Country = s.country,
-                        Dob = s.dob,
-                        Email = s.email,
-                        JoinDate = s.joinDate,
-                        Phone = s.phone,
-                        PostalCode = s.postalCode,
-                        Region = s.region,
-                        Status = s.status,
-                        StudentID = s.studentID
-                    };
 
-                foreach (var item in list as IQueryable<Student>)
-                {
-                    studentsInClass.Add(item);
-                }
+                var classList = dbInfo.tblCourses
+                    .Where(n=>n.courseID == selectedClassID)
+                    .SelectMany(s => s.tblStudents).ToList();
+
+                studentsInClass = new ObservableCollection<tblStudent>(classList);
+
+                #region Old way for getting list then casting into new student.
+                //Old way for getting list.
+                //var list =
+                //    from s in dbInfo.tblStudents
+                //    from course in s.tblCourses
+                //    where course.courseID == selectedClassID
+                //    select new Student
+                //    {
+                //        FirstName = s.firstName,
+                //        LastName = s.lastName,
+                //        Address = s.address,
+                //        City = s.city,
+                //        Country = s.country,
+                //        Dob = s.dob,
+                //        Email = s.email,
+                //        JoinDate = s.joinDate,
+                //        Phone = s.phone,
+                //        PostalCode = s.postalCode,
+                //        Region = s.region,
+                //        Status = s.status,
+                //        StudentID = s.studentID
+                //    };
+
+                //foreach (var item in cs as IQueryable<tblStudent>)
+                //{
+                //    studentsInClass.Add(item);
+                //}
+                #endregion
             }
-
             return studentsInClass;
         }
 
@@ -125,35 +144,17 @@ namespace RegiStar.ViewModel
         /// then sends all the information into a list of tblStudents.
         /// </summary>
         /// <returns> The list of all the students in the database. </returns>
-        public ObservableCollection<Student> getStudentNames()
+        public ObservableCollection<tblStudent> getStudentNames()
         {
-            studentList = new ObservableCollection<Student>();
+            studentList = new ObservableCollection<tblStudent>();
 
             using (RegistarDbContext dbInfo = new RegistarDbContext())
             {
                 //Fetech the students.
-                var query = dbInfo.tblStudents
-                    .Select(s=>new Student
-                    {
-                        FirstName = s.firstName,
-                        LastName = s.lastName,
-                        Address = s.address,
-                        City = s.city,
-                        Country = s.country,
-                        Dob = s.dob,
-                        Email = s.email,
-                        JoinDate = s.joinDate,
-                        Phone = s.phone,
-                        PostalCode = s.postalCode,
-                        Region = s.region,
-                        Status = s.status,
-                        StudentID = s.studentID
-                    });
+                var query = dbInfo.tblStudents.ToList<tblStudent>();
 
-                foreach (var item in query as IQueryable<Student>)
-                {
-                    studentList.Add(item);
-                }
+                //Initialize the list to the list of courses
+                studentList = new ObservableCollection<tblStudent>(query);
             }
 
             //return the newly initlaized list.

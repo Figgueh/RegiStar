@@ -67,5 +67,7 @@ namespace RegiStar.Model
         public virtual ICollection<tblCours> tblCourses { get; set; }
 
         public virtual tblUser tblUser { get; set; }
+
+        public string fullName { get => firstName + " " + lastName; }
     }
 }

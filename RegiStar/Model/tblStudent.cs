@@ -75,5 +75,7 @@ namespace RegiStar.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCours> tblCourses { get; set; }
+
+        public string fullName { get=> firstName + " " + lastName; }
     }
 }

@@ -19,7 +19,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
     </Window.Resources>
     
     <Grid Margin="25">

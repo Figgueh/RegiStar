@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RegiStar.Model;
 using RegiStar.ViewModel;
 
 namespace RegiStar.Windows
@@ -26,21 +27,21 @@ namespace RegiStar.Windows
             InitializeComponent();
         }
 
+
         //Constructor when sending the window a student.
-        public PeopleView(Student student)
+        public PeopleView(tblStudent student)
         {
             InitializeComponent();
+            this.DataContext = new PeopleViewModel(student);
             stackStudent.Visibility = Visibility.Visible;
 
-            if (student.FirstName != null)
+            if (student != null)
             {
-                this.DataContext = student;
                 this.Title = "Edit student :";
-                labelHeader.Content = "Editing student " + student.FullName;
+                labelHeader.Content = "Editing student " + student.fullName;
             }
             else
             {
-                this.DataContext = new Student();
                 this.Title = "New student :";
                 labelHeader.Content = "Please enter the following information to create a new student.";
             }
@@ -49,21 +50,20 @@ namespace RegiStar.Windows
         }
 
         //Constructor when sending the window a student.
-        public PeopleView(Teacher teacher)
+        public PeopleView(tblTeacher teacher)
         {
             InitializeComponent();
+            this.DataContext = new PeopleViewModel(teacher);
             stackTeacher.Visibility = Visibility.Visible;
 
 
-            if (teacher.FirstName != null)
+            if (teacher != null)
             {
-                this.DataContext = teacher;
                 this.Title = "Edit teacher :";
-                labelHeader.Content = "Editing teacher " + teacher.FullName;
+                labelHeader.Content = "Editing teacher " + teacher.fullName;
             }
             else
             {
-                this.DataContext = new Teacher();
                 this.Title = "New teacher :";
                 labelHeader.Content = "Please enter the following information to create a new teacher.";
             }
