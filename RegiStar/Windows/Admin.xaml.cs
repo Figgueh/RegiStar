@@ -32,8 +32,8 @@ namespace RegiStar.Windows
 
         private void ddlClass_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            //Ask how we can remove this.
             listStudent.ItemsSource = AdminView.getStudentsInClass();
+
         }
 
         //Add student to classlist.
@@ -68,10 +68,34 @@ namespace RegiStar.Windows
         //Edit Teacher
         private void btnEditTeacher_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: FIND A WAY TO SEND THE TEACHER INFO.
             PeopleView editTeacher = new PeopleView(AdminView.selectedCourseList.tblTeacher);
             editTeacher.Show();
         }
 
-        
+        //New Course
+        private void NewCourse_Click(object sender, RoutedEventArgs e)
+        {
+            CourseWindow newCourseWindow = new CourseWindow(new tblCours());
+            newCourseWindow.Show();
+        }
+
+        //Edit Course
+        private void EditCourse_Click(object sender, RoutedEventArgs e)
+        {
+            CourseWindow editCourseWindow = new CourseWindow(AdminView.selectedCourseList);
+            editCourseWindow.Show();
+        }
+
+        //Remove all students
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AdminView.DeleteAll();
+        }
+
+        private void btnRemoveClass_Click(object sender, RoutedEventArgs e)
+        {
+            AdminView.RemoveClass();
+        }
     }
 }

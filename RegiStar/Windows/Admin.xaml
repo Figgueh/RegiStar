@@ -44,7 +44,7 @@
         <!--Label for class list-->
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <Label VerticalAlignment="Center" Content="List of students in : "/>
-            <Label x:Name="labelClass" VerticalAlignment="Center" Content="Math"/>
+            <Label x:Name="labelClass" VerticalAlignment="Center" Content="{Binding className}"/>
         </StackPanel>
         
         <!--Buttons for add new objects-->
@@ -54,7 +54,7 @@
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
             <Button x:Name="btnNewTeacher" Content="Teacher" VerticalAlignment="Center" Margin="20,0" Width="80" Click="btnNewTeacher_Click"/>
-            <Button Content="Class" VerticalAlignment="Center" Margin="10,0" Width="80"/>
+            <Button x:Name="NewCourse" Content="Class" VerticalAlignment="Center" Margin="10,0" Width="80" Click="NewCourse_Click"/>
         </StackPanel>
 
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" >
@@ -81,14 +81,14 @@
             <!--List control buttons-->
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <Label Margin="5" Content="List Controls:"/>
-                <Button Margin="10,2,10,3" Content="Clear list"/>
+                <Button Margin="10,2,10,3" Content="Clear list" Click="Button_Click"/>
                 <Button Margin="10,2,10,3" Content="Remove selected"/>
                 <Button x:Name="btnEditStudent" Margin="10,2,10,3" Content="Edit student" Click="btnEditStudent_Click" />
                 
                 <!--Class controls-->
                 <Label Margin="5,25,5,5" Content="Class Controls:"/>
-                <Button Margin="10,2,10,3" Content="Edit class"/>
-                <Button Margin="10,2,10,3" Content="Remove class"/>
+                <Button x:Name="EditCourse" Margin="10,2,10,3" Content="Edit class" Click="EditCourse_Click"/>
+                <Button x:Name="btnRemoveClass" Margin="10,2,10,3" Content="Remove class" Click="btnRemoveClass_Click"/>
                 <Button x:Name="btnEditTeacher" Margin="10,2,10,3" Content="Edit teacher" Click="btnEditTeacher_Click"/>
             </StackPanel>
         </Grid>

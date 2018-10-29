@@ -32,11 +32,11 @@ namespace RegiStar.Windows
         public PeopleView(tblStudent student)
         {
             InitializeComponent();
-            this.DataContext = new PeopleViewModel(student);
             stackStudent.Visibility = Visibility.Visible;
 
-            if (student != null)
+            if (student.firstName != null)
             {
+                this.DataContext = student;
                 this.Title = "Edit student :";
                 labelHeader.Content = "Editing student " + student.fullName;
             }
@@ -53,17 +53,18 @@ namespace RegiStar.Windows
         public PeopleView(tblTeacher teacher)
         {
             InitializeComponent();
-            this.DataContext = new PeopleViewModel(teacher);
             stackTeacher.Visibility = Visibility.Visible;
 
 
-            if (teacher != null)
+            if (teacher.firstName != null)
             {
+                this.DataContext = teacher;
                 this.Title = "Edit teacher :";
                 labelHeader.Content = "Editing teacher " + teacher.fullName;
             }
             else
             {
+                this.DataContext = teacher;
                 this.Title = "New teacher :";
                 labelHeader.Content = "Please enter the following information to create a new teacher.";
             }

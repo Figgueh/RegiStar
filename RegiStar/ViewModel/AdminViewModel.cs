@@ -6,14 +6,32 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RegiStar.ViewModel
 {
     public class AdminViewModel : BaseClass
     {
-        
+
+        tblCours course;
+        tblStudent student;
+
+
         //Course list entities:
-        public ObservableCollection<tblCours> courseList { get; set; }
+        private ObservableCollection<tblCours> _courseList;
+        public ObservableCollection<tblCours> courseList
+        {         
+            get
+            {
+                    return _courseList;
+            }
+            set
+            {
+                    _courseList = value;
+                    OnPropertyChanged("courseList");
+            }
+        }
+
         private tblCours _selectedCourseList;
         public tblCours selectedCourseList
         {
@@ -29,7 +47,20 @@ namespace RegiStar.ViewModel
         }
 
         //Student list entities:
-        public ObservableCollection<tblStudent> studentList { get; set; }
+        private ObservableCollection<tblStudent> _studentList;
+        public ObservableCollection<tblStudent> studentList
+        {
+            get
+            {
+                return _studentList;
+            }
+            set
+            {
+                _studentList = value;
+                OnPropertyChanged("studentList");
+            }
+        }
+
         private tblStudent _selectedStudentList;
         public tblStudent selectedStudentList
         {
@@ -45,7 +76,20 @@ namespace RegiStar.ViewModel
         }
 
         //entities for the list of students in a class:
-        public ObservableCollection<tblStudent> studentsInClass { get; set; }
+        private ObservableCollection<tblStudent> _studentsInClass;
+        public ObservableCollection<tblStudent> studentsInClass
+        {
+            get
+            {
+                return _studentsInClass;
+            }
+            set
+            {
+                _studentsInClass = value;
+                OnPropertyChanged("studentsInClass");
+            }
+        }
+
         private tblStudent _selectedStudentsInClass;
         public tblStudent selectedStudentsInClass
         {
@@ -60,14 +104,45 @@ namespace RegiStar.ViewModel
             }
         }
 
+        public string className { get; set; }
+
         public AdminViewModel()
         {
             getStudentNames();
             getClasses();
         }
 
+        public void RemoveClass()
+        {
+            //Get the course we want to remove.
+            course = selectedCourseList;
+
+            //Display message to confirm action.
+            switch (MessageBox.Show(
+                String.Format("This will remove the course {0}. Are you sure you want to remove this course?", course.name),
+                "WARNING: Are you sure you want to remove the course?", MessageBoxButton.YesNo, MessageBoxImage.Question))
+            {
+                case MessageBoxResult.Yes:
+                    //TODO FIX LOGIC HERE:
+                    using (RegistarDbContext db = new RegistarDbContext())
+                    {
+                        var classList = from c in db.tblCourses
+                                        where c.courseID == course.courseID
+                                        select c;
+
+                        db.tblCourses.RemoveRange(classList);
+                        db.SaveChanges();
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+
+        }
+
         public void addStudent()
         {
+            //TODO FIX LOGIC HERE:
             using (RegistarDbContext db = new RegistarDbContext())
             {
                 var query = db.tblCourses
@@ -79,8 +154,56 @@ namespace RegiStar.ViewModel
                 }
                 db.SaveChanges();
             }
-
         }
+
+        public void DeleteAll()
+        {
+            //Get the course that we want to remove.
+            course = selectedCourseList;
+
+            //Display message to confirm action.
+            switch (MessageBox.Show(
+                String.Format("This will remove all the students from {0}. Are you sure you want to perform this action?",course.name), 
+                "WARNING: Are you sure you want to clear the class list?", MessageBoxButton.YesNo, MessageBoxImage.Question))
+            {
+                case MessageBoxResult.Yes:
+                    //TODO FIX LOGIC HERE:
+                    using(RegistarDbContext db = new RegistarDbContext())
+                    {
+                        var classList = from c in db.tblCourses
+                                        where c.courseID == course.courseID
+                                        select c;
+
+                        db.tblCourses.RemoveRange(classList);
+                        db.SaveChanges();
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+        }
+
+        public void RemoveSelectedStudent()
+        {
+            //Get the student that we want to remove.
+            student = selectedStudentsInClass;
+
+            using (RegistarDbContext db = new RegistarDbContext())
+            {
+                var classList = from c in db.tblCourses
+                                where c.courseID == course.courseID
+                                select c.tblStudents.ToList();
+
+
+                foreach (var item in classList)
+                {
+                    //db.tblCourses.Remove(item);
+                }
+                //db.tblCourses.RemoveRange(student);
+
+            }
+        }
+
 
         /// <summary>
         /// This function gets all the students in the selected class,
@@ -135,6 +258,10 @@ namespace RegiStar.ViewModel
                 //}
                 #endregion
             }
+
+            //Update the label that shows the class name:
+            className = Convert.ToString(selectedCourseList.name);
+
             return studentsInClass;
         }
 

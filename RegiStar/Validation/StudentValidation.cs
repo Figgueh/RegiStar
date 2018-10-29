@@ -19,7 +19,7 @@ namespace RegiStar.Validation
             List<int> userID = new List<int>();
 
             //Setup connection to database.
-            using (SqlConnection conn = new SqlConnection(ConnectionInfo.connectionString))
+            using (SqlConnection conn = new SqlConnection("Data Source=DESKTOP-7C48ELV;Initial Catalog=wpfRegistar;Integrated Security=True"))
             {
                 //Open the connection.
                 conn.Open();
