@@ -23,23 +23,83 @@ namespace RegiStar.ViewModel
             }
         }
 
-        private tblBook _book;
-        public tblBook Book
+        private int _newestCourseID;
+        public int NewestCourseID
         {
-            get;set;
+            get
+            {
+                return _newestCourseID;
+            }
+            set
+            {
+                _newestCourseID = value;
+                OnPropertyChanged("NewestCourseID");
+            }
         }
 
-        public CourseViewModel(tblCours cours)
+        private int _book;
+        public int Book
         {
-            Course = cours;
+            get
+            {
+                return _book;
+            }
+            set
+            {
+                _book = value;
+                OnPropertyChanged("Book");
+            }
+        }
+
+        private int _teacher;
+        public int Teacher
+        {
+            get
+            {
+                return _teacher;
+            }
+            set
+            {
+                _teacher = value;
+                OnPropertyChanged("Teacher");
+}
         }
 
         public CourseViewModel()
         {
-            
+            if(Course != null)
+            {
+                Book = Course.isbn;
+                Teacher = Course.teacherID;
+            }
         }
 
+        public CourseViewModel(tblCours course, int newestCourseID) : this()
+        {
+            Course = course;
+            NewestCourseID = newestCourseID;
+        }
+
+        public CourseViewModel(tblCours course) : this()
+        {
+            if(course != null)
+            {
+                Course = course;
+            }
+        }
+
+        public void Save(tblCours newCourse)
+        {
+            using (RegistarDbContext db = new RegistarDbContext())
+            {
+                //Add new newest course ID to the course.
+                if(newCourse.courseID == 0)
+                newCourse.courseID = NewestCourseID;
 
 
+                db.tblCourses.Add(newCourse);
+                db.SaveChanges();
+            }
+        }
     }
 }

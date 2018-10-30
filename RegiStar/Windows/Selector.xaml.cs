@@ -32,15 +32,17 @@ namespace RegiStar.Windows
 
         public Selector(tblBook book) : this()
         {
-            this.Title = "Please select one of the follow Books.";
+            this.Title = "Books Selection";
             listBooks.Visibility = Visibility.Visible;
+            btnSelectBook.Visibility = Visibility.Visible;
 
         }
 
         public Selector(tblTeacher teacher) : this()
         {
-            this.Title = "Please select one of the follow Teachers.";
+            this.Title = "Teacher Selection";
             listTeachers.Visibility = Visibility.Visible;
+            btnSelectTeacher.Visibility = Visibility.Visible;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -48,9 +50,29 @@ namespace RegiStar.Windows
             this.Close();
         }
 
-        private void btnSelect_Click(object sender, RoutedEventArgs e)
+        private void btnSelectBook_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+        //    //Target the dataContext in the CorseViewModel so that we can show the user the update value.
+        //    //if (selectorViewModel.SelectedBook != null)
+        //        //((CourseViewModel)DataContext).Book = selectorViewModel.SelectedBook;
+        //    else
+        //    {
+        //        MessageBox.Show("You must select one of the books for the class.");
+        //        this.DialogResult = false;
+                
+        //    }
+        }
+
+        private void btnSelectTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            //Target the dataContext in the CorseViewModel so that we can show the user the update value.
+            //if (selectorViewModel.SelectedTeacher != null)
+                //((CourseViewModel)DataContext).Teacher = selectorViewModel.SelectedTeacher;
+            //else
+            //{
+            //    MessageBox.Show("You must select one of the teachers for the class.");
+            //    this.DialogResult = false;
+            //}
         }
     }
 }

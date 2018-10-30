@@ -27,8 +27,8 @@ namespace RegiStar
         public MainWindow()
         {
             InitializeComponent();
-            txtUserID.Text = "2";
-            txtPassword.Password = " ";
+            txtUserID.Text = "1";
+            txtPassword.Password = "admin";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

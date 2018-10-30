@@ -19,46 +19,44 @@ namespace RegiStar.Windows
     /// <summary>
     /// Interaction logic for StudentView.xaml
     /// </summary>
-    public partial class PeopleView : Window
+    public partial class PeopleViewTeacher : Window
     {
+        tblTeacher teacher;
         PeopleViewModel peopleViewModel;
 
         //Constructor when sending the window nothing
-        public PeopleView()
+        public PeopleViewTeacher()
         {
             InitializeComponent();
         }
 
 
-        //Constructor when new student.
-        public PeopleView(tblStudent student, int newestID) : this()
+        //Constructor when sending a new teacher
+        public PeopleViewTeacher(tblTeacher teacher, int newestID) : this()
         {
-            //Create a new student with the newest studentID
-            student = new tblStudent{ studentID = newestID };
+            //Create a new teacher with the newest teacherID
+            teacher = new tblTeacher { teacherID = newestID };
 
             //Send it to the view model.
-            peopleViewModel = new PeopleViewModel(student);
+            peopleViewModel = new PeopleViewModel(teacher);
             this.DataContext = peopleViewModel;
 
-            //Show the student controls.
-
+            //Show the teacher controls.
             passwordStack.Visibility = Visibility.Visible;
-            this.Title = "New student :";
-            labelHeader.Content = "Please enter the following information to create a new student.";
-            
+            this.Title = "New teacher :";
+            labelHeader.Content = "Please enter the following information to create a new teacher.";
         }
 
-        //Constructor when editing student.
-        public PeopleView(tblStudent student) : this()
+        //Constructor when editing teacher.
+        public PeopleViewTeacher(tblTeacher teacher) : this()
         {
             //Send it to the view model.
-            peopleViewModel = new PeopleViewModel(student);
+            peopleViewModel = new PeopleViewModel(teacher);
             this.DataContext = peopleViewModel;
 
-            //Show the edit student controls.
-            studentGrid.Visibility = Visibility.Visible;
-            this.Title = "Edit student :";
-            labelHeader.Content = "Editing student " + student.fullName;
+            //Show the teacher controls.
+            this.Title = "Edit teacher :";
+            labelHeader.Content = "Editing teacher " + teacher.fullName;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -68,7 +66,7 @@ namespace RegiStar.Windows
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            peopleViewModel.saveStudent();
+            peopleViewModel.saveTeacher();
             this.Close();
         }
     }

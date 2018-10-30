@@ -22,29 +22,33 @@ namespace RegiStar.Windows
     public partial class CourseWindow : Window
     {
         CourseViewModel courseViewModel;
-        tblCours newCourse;
+        tblCours Course;
+        tblTeacher Teacher;
+        tblBook Book;
 
         public CourseWindow()
         {
             InitializeComponent();
         }
 
+        //Constructor for editing course
         public CourseWindow(tblCours course) : this()
         {
-            if (course.name != null)
-            {
-                courseViewModel = new CourseViewModel(course);
-                this.DataContext = courseViewModel;
-                this.Title = "Edit course :";
-                labelHeader.Content = "Editing course " + course.name;
-            }
-            else
-            {
-                courseViewModel = new CourseViewModel();
-                this.DataContext = courseViewModel;
-                this.Title = "New course :";
-                labelHeader.Content = "Please enter the following information to create a new Course.";
-            }
+            courseViewModel = new CourseViewModel(course);
+            this.DataContext = courseViewModel;
+            this.Title = "Edit course :";
+            labelHeader.Content = "Editing course " + course.name;
+
+
+        }
+
+        //Constructor for new course.
+        public CourseWindow(tblCours course, int newestCourseID) : this()
+        {
+            courseViewModel = new CourseViewModel(course, newestCourseID);
+            this.DataContext = courseViewModel;
+            this.Title = "New course :";
+            labelHeader.Content = "Please enter the following information to create a new Course.";
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -54,27 +58,28 @@ namespace RegiStar.Windows
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            newCourse = (tblCours)this.DataContext;
-            using(RegistarDbContext db = new RegistarDbContext())
-            {
-                db.tblCourses.Add(newCourse);
-                db.SaveChanges();
-            }
+            Course = (tblCours)this.DataContext;
+            courseViewModel.Save(Course);
 
         }
 
         private void btnBook_Click(object sender, RoutedEventArgs e)
         {
-            Selector bookSelector = new Selector(new tblBook());
-            bookSelector.Show();
-            txtBook.Text = Convert.ToString(((SelectorViewModel)bookSelector.DataContext).SelectedBook.isbn);
+            Selector bookSelector = new Selector(Book);
+            bookSelector.ShowDialog();
+
+            if(((SelectorViewModel)DataContext).SelectedBook != null)
+            {
+                txtBook.Text = ((SelectorViewModel)DataContext).SelectedBook.isbn.ToString();
+            }
             
+
 
         }
 
         private void btnTeacher_Click(object sender, RoutedEventArgs e)
         {
-            Selector teacherSelector = new Selector(new tblTeacher());
+            Selector teacherSelector = new Selector(Teacher);
             teacherSelector.Show();
         }
     }

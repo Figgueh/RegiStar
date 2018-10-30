@@ -1,4 +1,5 @@
-﻿using RegiStar.Model;
+﻿using AutoMapper;
+using RegiStar.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,6 +49,21 @@ namespace RegiStar.ViewModel
             set
             {
                 _selectedBook = value;
+
+                OnPropertyChanged("SelectedBook");
+            }
+        }
+
+        private int _bookNumber;
+        public int bookNumber
+        {
+            get
+            {
+                return _bookNumber;
+            }
+            set
+            {
+                _bookNumber = value;
                 OnPropertyChanged("SelectedBook");
             }
         }
@@ -72,6 +88,14 @@ namespace RegiStar.ViewModel
         {
             Books = GetBooks();
             Teachers = GetTeachers();
+        }
+
+
+
+        public void getSelectedBook()
+        {
+            //CreateMap<SelectorViewModel, CourseViewModel>()
+
         }
 
         public ObservableCollection<tblTeacher> GetTeachers()

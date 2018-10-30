@@ -60,7 +60,7 @@
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -82,13 +82,13 @@
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <Label Margin="5" Content="List Controls:"/>
                 <Button Margin="10,2,10,3" Content="Clear list" Click="Button_Click"/>
-                <Button x:Name="btnRemoveSelected" Margin="10,2,10,3" Content="Remove selected" Click="btnRemoveSelected_Click"/>
+                <Button x:Name="btnRemoveSelected" Margin="10,2,10,3" Content="Remove student" Click="btnRemoveSelected_Click"/>
                 <Button x:Name="btnEditStudent" Margin="10,2,10,3" Content="Edit student" Click="btnEditStudent_Click" />
                 
                 <!--Class controls-->
                 <Label Margin="5,25,5,5" Content="Class Controls:"/>
                 <Button x:Name="EditCourse" Margin="10,2,10,3" Content="Edit class" Click="EditCourse_Click"/>
-                <Button x:Name="btnRemoveClass" Margin="10,2,10,3" Content="Remove class" Click="btnRemoveClass_Click"/>
+                <Button x:Name="btnRemoveClass" Margin="10,2,10,3" Content="Remove course" Click="btnRemoveClass_Click"/>
                 <Button x:Name="btnEditTeacher" Margin="10,2,10,3" Content="Edit teacher" Click="btnEditTeacher_Click"/>
             </StackPanel>
         </Grid>
