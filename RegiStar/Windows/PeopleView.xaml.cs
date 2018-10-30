@@ -21,6 +21,10 @@ namespace RegiStar.Windows
     /// </summary>
     public partial class PeopleView : Window
     {
+        tblStudent _student;
+        tblTeacher _teacher;
+        PeopleViewModel peopleViewModel;
+
         //Constructor when sending the window nothing
         public PeopleView()
         {
@@ -31,12 +35,14 @@ namespace RegiStar.Windows
         //Constructor when sending the window a student.
         public PeopleView(tblStudent student)
         {
+            _student = student;
             InitializeComponent();
+            peopleViewModel = new PeopleViewModel(_student);
+            this.DataContext = peopleViewModel;
             stackStudent.Visibility = Visibility.Visible;
 
             if (student.firstName != null)
             {
-                this.DataContext = student;
                 this.Title = "Edit student :";
                 labelHeader.Content = "Editing student " + student.fullName;
             }
@@ -52,19 +58,21 @@ namespace RegiStar.Windows
         //Constructor when sending the window a student.
         public PeopleView(tblTeacher teacher)
         {
+            _teacher = teacher;
             InitializeComponent();
+            peopleViewModel = new PeopleViewModel(_teacher);
+            this.DataContext = peopleViewModel;
             stackTeacher.Visibility = Visibility.Visible;
+
 
 
             if (teacher.firstName != null)
             {
-                this.DataContext = teacher;
                 this.Title = "Edit teacher :";
                 labelHeader.Content = "Editing teacher " + teacher.fullName;
             }
             else
             {
-                this.DataContext = teacher;
                 this.Title = "New teacher :";
                 labelHeader.Content = "Please enter the following information to create a new teacher.";
             }
@@ -74,6 +82,11 @@ namespace RegiStar.Windows
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            peopleViewModel.saveStudent(_student);
         }
     }
 }

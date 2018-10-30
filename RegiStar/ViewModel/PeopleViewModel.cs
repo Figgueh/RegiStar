@@ -10,23 +10,59 @@ namespace RegiStar.ViewModel
 {
     public class PeopleViewModel : BaseClass
     {
-        private tblTeacher teacher;
-        private tblStudent student;
+        private tblTeacher _teacher;
+        public tblTeacher Teacher
+        {
+            get
+            {
+                return _teacher;
+            }
+            set
+            {
+                _teacher = value;
+                OnPropertyChanged("Teacher");
+            }
+        }
+
+        private tblStudent _student;
+        public tblStudent Student
+        {
+            get
+            {
+                return _student;
+            }
+            set
+            {
+                _student = value;
+                OnPropertyChanged("Student");
+            }
+        }
 
         public PeopleViewModel(tblStudent tblStudent)
         {
-
+            Student = tblStudent;
         }
 
         public PeopleViewModel(tblTeacher teacher)
         {
-            
+            Teacher = teacher;
         }
 
-
-        public void pullData()
+        public void saveStudent(tblStudent student)
         {
+            using(RegistarDbContext db = new RegistarDbContext())
+            {
+                //Select the student table.
+                var Students = db.tblStudents;
+                
+
+                Students.Add(student);
+                db.SaveChanges();
+            }
+
             
+            //listStudent.ItemsSource = AdminView.getStudentsInClass();
         }
+
     }
 }

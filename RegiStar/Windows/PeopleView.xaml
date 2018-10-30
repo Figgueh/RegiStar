@@ -44,7 +44,7 @@
             <Label Content="StudentID :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="studentID" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.studentID" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="1" Max="50"></val:LengthValidation>
                             <val:StudentValidation/>
@@ -58,7 +58,7 @@
             <Label Content="TeacherID :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="teacherID" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Teacher.teacherID" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="1" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -69,14 +69,14 @@
 
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
             <Label Content="Date of birth :" Width="100" VerticalAlignment="Center"/>
-            <DatePicker VerticalAlignment="Center" Width="200" Text="{Binding dob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker VerticalAlignment="Center" Width="200" Text="{Binding Student.dob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
             <Label Content="First Name :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="firstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.firstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="1" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -89,7 +89,7 @@
             <Label Content="Last Name :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="lastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.lastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="1" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -100,14 +100,14 @@
 
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
             <Label Content="Join Date :" Width="100" VerticalAlignment="Center"/>
-            <DatePicker VerticalAlignment="Center" Width="200" Text="{Binding joinDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker VerticalAlignment="Center" Width="200" Text="{Binding Student.joinDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="4">
             <Label Content="Address :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="2" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -120,7 +120,7 @@
             <Label Content="City :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="city" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.city" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="2" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -133,7 +133,7 @@
             <Label Content="Region :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="region" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.region" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="2" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -146,7 +146,7 @@
             <Label Content="Postal Code :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="postalCode" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.postalCode" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="2" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -159,7 +159,7 @@
             <Label Content="Country :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="country" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.country" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="2" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -172,7 +172,7 @@
             <Label Content="Email :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="2" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -185,7 +185,7 @@
             <Label Content="Phone :" Width="100" VerticalAlignment="Center"/>
             <TextBox VerticalAlignment="Center" Width="200" Style="{StaticResource textBoxError}">
                 <TextBox.Text>
-                    <Binding Path="phone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Student.phone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:LengthValidation Min="2" Max="50"></val:LengthValidation>
                         </Binding.ValidationRules>
@@ -205,7 +205,7 @@
             </Grid.RowDefinitions>
             
             <Button x:Name="btnClose" Margin="5" Grid.Column="1" Grid.Row="0" Content="Close" VerticalAlignment="Center" Click="btnClose_Click"/>
-            <Button x:Name="btnSave" Margin="5" Grid.Column="2" Grid.Row="0" Content="Save" VerticalAlignment="Center"/>
+            <Button x:Name="btnSave" Margin="5" Grid.Column="2" Grid.Row="0" Content="Save" VerticalAlignment="Center" Click="btnSave_Click"/>
         </Grid>
 
     </Grid>

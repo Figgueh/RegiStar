@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Selector" Height="528.532" Width="281.44">
     <Grid>
-        <ListBox x:Name="listContent" HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="273"/>
+        <ListBox x:Name="listBooks" ItemsSource="{Binding Books}" SelectedValue="{Binding SelectedBook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="273" Visibility="Hidden"/>
+        <ListBox x:Name="listTeachers" ItemsSource="{Binding Teachers}" SelectedValue="{Binding SelectedTeacher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="273" Visibility="Hidden"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="97,468,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
         <Button x:Name="btnSelect" Content="Select" HorizontalAlignment="Left" Margin="188,468,0,0" VerticalAlignment="Top" Width="75" Click="btnSelect_Click"/>
 

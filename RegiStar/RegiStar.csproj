@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\RegistarDbContext.cs" />
+    <Compile Include="Model\sysdiagram.cs" />
     <Compile Include="Model\tblAttendance.cs" />
     <Compile Include="Model\tblBook.cs" />
     <Compile Include="Model\tblCours.cs" />
@@ -90,9 +91,11 @@
     <Compile Include="Model\tblUser.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\BaseClass.cs" />
+    <Compile Include="ViewModel\CourseViewModel.cs" />
     <Compile Include="ViewModel\PeopleViewModel.cs" />
     <Compile Include="Validation\LengthValidation.cs" />
     <Compile Include="Validation\StudentValidation.cs" />
+    <Compile Include="ViewModel\SelectorViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="Windows\AcademicDetails.xaml.cs">
       <DependentUpon>AcademicDetails.xaml</DependentUpon>

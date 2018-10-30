@@ -91,11 +91,18 @@ namespace RegiStar.Windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AdminView.DeleteAll();
+            listStudent.ItemsSource = AdminView.getStudentsInClass();
         }
 
         private void btnRemoveClass_Click(object sender, RoutedEventArgs e)
         {
             AdminView.RemoveClass();
+        }
+
+        private void btnRemoveSelected_Click(object sender, RoutedEventArgs e)
+        {
+            AdminView.RemoveSelectedStudent();
+            listStudent.ItemsSource = AdminView.getStudentsInClass();
         }
     }
 }

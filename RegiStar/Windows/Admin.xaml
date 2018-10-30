@@ -67,7 +67,7 @@
             </Grid.RowDefinitions>
 
             <!--List for students in a specific class-->
-            <ListView x:Name="listStudent" ItemsSource="{Binding studentsInClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView x:Name="listStudent" ItemsSource="{Binding studentsInClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding selectedStudentsInClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Student ID" Width="75" DisplayMemberBinding="{Binding studentID}" />
@@ -82,7 +82,7 @@
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <Label Margin="5" Content="List Controls:"/>
                 <Button Margin="10,2,10,3" Content="Clear list" Click="Button_Click"/>
-                <Button Margin="10,2,10,3" Content="Remove selected"/>
+                <Button x:Name="btnRemoveSelected" Margin="10,2,10,3" Content="Remove selected" Click="btnRemoveSelected_Click"/>
                 <Button x:Name="btnEditStudent" Margin="10,2,10,3" Content="Edit student" Click="btnEditStudent_Click" />
                 
                 <!--Class controls-->

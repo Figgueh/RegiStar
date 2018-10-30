@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RegiStar.Model;
+using RegiStar.ViewModel;
 
 namespace RegiStar.Windows
 {
@@ -20,21 +21,27 @@ namespace RegiStar.Windows
     /// </summary>
     public partial class CourseWindow : Window
     {
+        CourseViewModel courseViewModel;
         tblCours newCourse;
 
-        public CourseWindow(tblCours course)
+        public CourseWindow()
         {
             InitializeComponent();
+        }
 
+        public CourseWindow(tblCours course) : this()
+        {
             if (course.name != null)
             {
-                this.DataContext = course;
+                courseViewModel = new CourseViewModel(course);
+                this.DataContext = courseViewModel;
                 this.Title = "Edit course :";
                 labelHeader.Content = "Editing course " + course.name;
             }
             else
             {
-                this.DataContext = new tblCours();
+                courseViewModel = new CourseViewModel();
+                this.DataContext = courseViewModel;
                 this.Title = "New course :";
                 labelHeader.Content = "Please enter the following information to create a new Course.";
             }
@@ -60,6 +67,9 @@ namespace RegiStar.Windows
         {
             Selector bookSelector = new Selector(new tblBook());
             bookSelector.Show();
+            txtBook.Text = Convert.ToString(((SelectorViewModel)bookSelector.DataContext).SelectedBook.isbn);
+            
+
         }
 
         private void btnTeacher_Click(object sender, RoutedEventArgs e)

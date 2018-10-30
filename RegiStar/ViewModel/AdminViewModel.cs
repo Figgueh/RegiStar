@@ -140,22 +140,21 @@ namespace RegiStar.ViewModel
 
         }
 
+        //TODO: add comments
         public void addStudent()
         {
-            //TODO FIX LOGIC HERE:
+            var selectedCourseID = selectedCourseList.courseID;
+
             using (RegistarDbContext db = new RegistarDbContext())
             {
-                var query = db.tblCourses
-                .Select(s => s.tblStudents);
-
-                foreach (var item in query)
-                {
-                    item.Add(selectedStudentList);
-                }
+                var course = db.tblCourses.Where(c => c.courseID == selectedCourseID).FirstOrDefault();
+                var student = db.tblStudents.Where(s => s.studentID == selectedStudentList.studentID).FirstOrDefault();
+                course.tblStudents.Add(student);
                 db.SaveChanges();
             }
         }
 
+        //TODO: add comments
         public void DeleteAll()
         {
             //Get the course that we want to remove.
@@ -167,14 +166,17 @@ namespace RegiStar.ViewModel
                 "WARNING: Are you sure you want to clear the class list?", MessageBoxButton.YesNo, MessageBoxImage.Question))
             {
                 case MessageBoxResult.Yes:
-                    //TODO FIX LOGIC HERE:
                     using(RegistarDbContext db = new RegistarDbContext())
                     {
-                        var classList = from c in db.tblCourses
-                                        where c.courseID == course.courseID
-                                        select c;
+                        var classList = db.tblCourses.Where(c => c.courseID == course.courseID).FirstOrDefault();
+                        var studentsInClass = db.tblCourses
+                            .Where(n => n.courseID == course.courseID)
+                            .SelectMany(s => s.tblStudents);
 
-                        db.tblCourses.RemoveRange(classList);
+                        foreach(var item in studentsInClass)
+                        {
+                            classList.tblStudents.Remove(item);
+                        }
                         db.SaveChanges();
                     }
                     break;
@@ -187,19 +189,15 @@ namespace RegiStar.ViewModel
         {
             //Get the student that we want to remove.
             student = selectedStudentsInClass;
+            course = selectedCourseList;
 
             using (RegistarDbContext db = new RegistarDbContext())
             {
-                var classList = from c in db.tblCourses
-                                where c.courseID == course.courseID
-                                select c.tblStudents.ToList();
+                var classList = db.tblCourses.Where(c => c.courseID == course.courseID).FirstOrDefault();
+                var studentToRemove = db.tblStudents.Where(s => s.studentID == selectedStudentsInClass.studentID).FirstOrDefault();
 
-
-                foreach (var item in classList)
-                {
-                    //db.tblCourses.Remove(item);
-                }
-                //db.tblCourses.RemoveRange(student);
+                classList.tblStudents.Remove(studentToRemove);
+                db.SaveChanges();
 
             }
         }
@@ -223,7 +221,7 @@ namespace RegiStar.ViewModel
             using (RegistarDbContext dbInfo = new RegistarDbContext())
             {
 
-                var classList = dbInfo.tblCourses
+                var classList = dbInfo.tblCourses.AsNoTracking()
                     .Where(n=>n.courseID == selectedClassID)
                     .SelectMany(s => s.tblStudents).ToList();
 

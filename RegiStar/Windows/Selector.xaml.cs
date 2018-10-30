@@ -1,6 +1,8 @@
 ﻿using RegiStar.Model;
+using RegiStar.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,20 +22,25 @@ namespace RegiStar.Windows
     /// </summary>
     public partial class Selector : Window
     {
+        SelectorViewModel selectorViewModel = new SelectorViewModel();
+
         public Selector()
         {
             InitializeComponent();
+            this.DataContext = selectorViewModel;
         }
 
-        public Selector(tblBook book)
+        public Selector(tblBook book) : this()
         {
-            GetBooks();
-            //this.DataContext = book;
+            this.Title = "Please select one of the follow Books.";
+            listBooks.Visibility = Visibility.Visible;
+
         }
-        public Selector(tblTeacher teacher)
+
+        public Selector(tblTeacher teacher) : this()
         {
-            GetTeachers();
-            //this.DataContext = teacher;
+            this.Title = "Please select one of the follow Teachers.";
+            listTeachers.Visibility = Visibility.Visible;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -43,29 +50,7 @@ namespace RegiStar.Windows
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            //Get the selected item:
-
-        }
-
-        public void GetTeachers()
-        {
-            using(RegistarDbContext db = new RegistarDbContext())
-            {
-                var query = from t in db.tblTeachers
-                            select t;
-
-                listContent.ItemsSource = query;
-            }
-        }
-
-        public void GetBooks()
-        {
-            using (RegistarDbContext db = new RegistarDbContext())
-            {
-                var query = db.tblBooks.Select(b => b).ToList();
-
-                listContent.ItemsSource = query;
-            }
+            this.Close();
         }
     }
 }

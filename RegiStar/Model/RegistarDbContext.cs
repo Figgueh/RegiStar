@@ -12,6 +12,7 @@ namespace RegiStar.Model
         {
         }
 
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblAttendance> tblAttendances { get; set; }
         public virtual DbSet<tblBook> tblBooks { get; set; }
         public virtual DbSet<tblCourseDetail> tblCourseDetails { get; set; }
