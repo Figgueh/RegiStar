@@ -1,4 +1,5 @@
-﻿using RegiStar.Model;
+﻿using AutoMapper;
+using RegiStar.Model;
 using RegiStar.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -52,15 +53,20 @@ namespace RegiStar.Windows
 
         private void btnSelectBook_Click(object sender, RoutedEventArgs e)
         {
-        //    //Target the dataContext in the CorseViewModel so that we can show the user the update value.
-        //    //if (selectorViewModel.SelectedBook != null)
-        //        //((CourseViewModel)DataContext).Book = selectorViewModel.SelectedBook;
-        //    else
-        //    {
-        //        MessageBox.Show("You must select one of the books for the class.");
-        //        this.DialogResult = false;
-                
-        //    }
+            //selectorViewModel.getSelectedBook();
+          
+            ((CourseViewModel)((Window)this.Parent).DataContext).Book = Mapper.Map<tblBook>(selectorViewModel.SelectedBook);
+
+
+            //    //Target the dataContext in the CorseViewModel so that we can show the user the update value.
+            //    //if (selectorViewModel.SelectedBook != null)
+            //        //((CourseViewModel)DataContext).Book = selectorViewModel.SelectedBook;
+            //    else
+            //    {
+            //        MessageBox.Show("You must select one of the books for the class.");
+            //        this.DialogResult = false;
+
+            //    }
         }
 
         private void btnSelectTeacher_Click(object sender, RoutedEventArgs e)

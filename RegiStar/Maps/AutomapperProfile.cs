@@ -8,13 +8,23 @@ using System.Threading.Tasks;
 
 namespace RegiStar.Maps
 {
-    public class AutomapperProfile : Profile
+    public static class MyMapper
     {
-        public AutomapperProfile()
+        private static bool _isInitialized;
+        public static bool Initialize()
         {
-            CreateMap<SelectorViewModel, CourseViewModel>();
-
-            //SelectorViewModel selector = Mapper.Map<SelectorViewModel>(((SelectorViewModel)DataContext).)
+            if (!_isInitialized)
+            {
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<SelectorViewModel, CourseViewModel>()
+                        .ForMember(destination => destination.Book, map => map.MapFrom(source => source.SelectedBook))
+                        .ForMember(destination => destination.Teacher, map => map.MapFrom(source => source.SelectedTeacher));
+                });
+                _isInitialized = true;
+            }
+            return _isInitialized;
         }
     }
+    
 }
