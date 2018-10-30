@@ -85,11 +85,6 @@ namespace RegiStar.ViewModel
 
                 var avCourses = allCourses.Except(dc);
 
-
-
-
-                //courseList = new List<tblCours>(dc2);
-
                 selectedList = new ObservableCollection<tblCours>(dc);
             }
 
