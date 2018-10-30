@@ -29,7 +29,7 @@ namespace RegiStar.Windows
 
     public partial class User : Window
     {
-        
+
         private void Init()
         {
             InitializeComponent();
@@ -45,9 +45,10 @@ namespace RegiStar.Windows
         {
             Init();
             ((UserViewModel)this.DataContext).userinfo = userinfo;
+
         }
 
-        private void btnAddStudent_Click(object sender, RoutedEventArgs e)
+        private void btnAddCourse_Click(object sender, RoutedEventArgs e)
         {
             var context = (UserViewModel)this.DataContext;
             context.addCourse();
@@ -55,7 +56,10 @@ namespace RegiStar.Windows
 
         private void btnAcademicDetails_Click(object sender, RoutedEventArgs e)
         {
-
+            var context = (UserViewModel)this.DataContext;
+            //var userinfo = context.userinfo;
+            AcademicDetails academicDetails = new AcademicDetails(context.userinfo);
+            academicDetails.Show();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -65,26 +69,27 @@ namespace RegiStar.Windows
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
+            ((UserViewModel)this.DataContext).UpdateStudentCourses();
         }
 
         private void btnRemoveClass_Click(object sender, RoutedEventArgs e)
         {
-           // selectedCoursesList.Remove(lstSelectedClasses.SelectedValue as Course);
+            var context = (UserViewModel)this.DataContext;
+            context.removeCourse();
+
         }
 
         private void btnRemoveAll_Click(object sender, RoutedEventArgs e)
         {
+            var context = (UserViewModel)this.DataContext;
+            context.selectedList.Clear();
 
-          //  selectedCoursesList = new ObservableCollection<Course>();
-           // lstSelectedClasses.ItemsSource = selectedCoursesList;
 
         }
 
-        private void txtUserID_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-          //txtUserID.Text = Convert.ToString(userinfo.userID);
-           
+            ((UserViewModel)this.DataContext).GetCourses();
         }
     }
 }

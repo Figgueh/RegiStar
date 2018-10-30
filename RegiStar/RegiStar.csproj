@@ -89,6 +89,7 @@
     <Compile Include="Model\tblStudent.cs" />
     <Compile Include="Model\tblTeacher.cs" />
     <Compile Include="Model\tblUser.cs" />
+    <Compile Include="ViewModel\AcademicDetailsViewModel.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\BaseClass.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
