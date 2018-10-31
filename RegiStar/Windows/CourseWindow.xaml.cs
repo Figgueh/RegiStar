@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using AutoMapper;
 using RegiStar.Model;
 using RegiStar.ViewModel;
 
@@ -22,9 +23,9 @@ namespace RegiStar.Windows
     public partial class CourseWindow : Window
     {
         CourseViewModel courseViewModel;
-        tblCours Course;
+        tblCours Course; 
         tblTeacher Teacher;
-        tblBook Book;
+        public tblBook Book { get; set; }
 
         public CourseWindow()
         {
@@ -66,13 +67,17 @@ namespace RegiStar.Windows
         private void btnBook_Click(object sender, RoutedEventArgs e)
         {
             Selector bookSelector = new Selector(Book);
-            bookSelector.ShowDialog();
+            bookSelector.Show();
+            // PLACE HERE
 
-            if(((SelectorViewModel)DataContext).SelectedBook != null)
-            {
-                txtBook.Text = ((SelectorViewModel)DataContext).SelectedBook.isbn.ToString();
-            }
-            
+            //((CourseViewModel)((Window)this.Parent).DataContext).Book = Mapper.Map<tblBook>(bookSelector.listBooks.SelectedItem);
+
+
+            //if (((SelectorViewModel)DataContext).SelectedBook != null)
+            //{
+            //    txtBook.Text = ((SelectorViewModel)DataContext).SelectedBook.isbn.ToString();
+            //}
+            var x = Book;
 
 
         }

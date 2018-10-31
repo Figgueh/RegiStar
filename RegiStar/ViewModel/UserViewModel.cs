@@ -44,11 +44,20 @@ namespace RegiStar.ViewModel
         public void addCourse()
         {
             selectedList.Add(selectedCours);
+
+                var result = coursesList.Where(p => !selectedList.Any(p2 => p2.courseID == p.courseID));
+                coursesList = new ObservableCollection<tblCours>(result);
+
+
         }
 
         public void removeCourse()
         {
+            var sel = deletedCours;
             selectedList.Remove(deletedCours);
+            coursesList.Add(sel);
+
+
         }
 
 

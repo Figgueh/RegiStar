@@ -42,7 +42,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
             <Label Content="Teacher ID :" VerticalAlignment="Center" Width="120"/>
-            <TextBox x:Name="txtTeacher" VerticalAlignment="Center" Width="75" TextWrapping="Wrap" Height="25" Margin="0,25" IsReadOnly="True" Text="{Binding Course.teacherID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="txtTeacher" VerticalAlignment="Center" Width="75" TextWrapping="Wrap" Height="25" Margin="0,25" IsReadOnly="True" Text="{Binding Teacher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Button x:Name="btnTeacher" Height="26" Width="100" Content="Select Teacher" Margin="35,0" Click="btnTeacher_Click"/>
         </StackPanel>
 

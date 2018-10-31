@@ -16,6 +16,7 @@ using System.Data.SqlClient;
 using RegiStar.Windows;
 using RegiStar.ViewModel;
 using RegiStar.Model;
+using RegiStar.Maps;
 
 namespace RegiStar
 {
@@ -29,6 +30,7 @@ namespace RegiStar
             InitializeComponent();
             txtUserID.Text = "1";
             txtPassword.Password = "admin";
+            MyMapper.Initialize();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

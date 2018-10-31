@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using RegiStar.Maps;
 using RegiStar.Model;
 using System;
 using System.Collections.Generic;
@@ -94,8 +95,12 @@ namespace RegiStar.ViewModel
 
         public void getSelectedBook()
         {
-            //CreateMap<SelectorViewModel, CourseViewModel>()
+            var book = Mapper.Map<tblBook>(SelectedBook);
+        }
 
+        public void getSelectedTeacher()
+        {
+            var teacher = Mapper.Map<tblTeacher>(SelectedTeacher);
         }
 
         public ObservableCollection<tblTeacher> GetTeachers()

@@ -1,4 +1,5 @@
-﻿using RegiStar.Model;
+﻿using AutoMapper;
+using RegiStar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +38,8 @@ namespace RegiStar.ViewModel
             }
         }
 
-        private int _book;
-        public int Book
+        private tblBook _book;
+        public tblBook Book
         {
             get
             {
@@ -51,8 +52,8 @@ namespace RegiStar.ViewModel
             }
         }
 
-        private int _teacher;
-        public int Teacher
+        private tblTeacher _teacher;
+        public tblTeacher Teacher
         {
             get
             {
@@ -67,10 +68,12 @@ namespace RegiStar.ViewModel
 
         public CourseViewModel()
         {
-            if(Course != null)
+            Book = Mapper.Map<tblBook>(Book);
+            Teacher = Mapper.Map<tblTeacher>(Teacher);
+            if (Course != null)
             {
-                Book = Course.isbn;
-                Teacher = Course.teacherID;
+                //Book = Course;
+                //Teacher = Course.tblTeacher;
             }
         }
 
@@ -79,6 +82,8 @@ namespace RegiStar.ViewModel
             Course = course;
             NewestCourseID = newestCourseID;
         }
+
+        
 
         public CourseViewModel(tblCours course) : this()
         {

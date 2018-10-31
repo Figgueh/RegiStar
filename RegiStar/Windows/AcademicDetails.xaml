@@ -15,10 +15,11 @@
             <TextBox x:Name="txtStudentID" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="142" Text="{Binding student.studentID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
             <TextBox x:Name="txtStudentName" HorizontalAlignment="Left" Height="23" Margin="0,2,0,0" TextWrapping="Wrap" Text="{Binding student.firstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="142"/>
         </StackPanel>
-        <ListView x:Name="lstListOfPreviousCourses" HorizontalAlignment="Left" Height="214" Margin="21,78,0,0" VerticalAlignment="Top" Width="231">
+        <ListView x:Name="lstListOfPreviousCourses" HorizontalAlignment="Left" Height="214" Margin="21,78,0,0" VerticalAlignment="Top" Width="231" ItemsSource="{Binding selectedList}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="List of Previous Classes" Width="220" />
+                    <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding courseID}" />
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding name}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

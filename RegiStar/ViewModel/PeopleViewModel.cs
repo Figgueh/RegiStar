@@ -71,6 +71,7 @@ namespace RegiStar.ViewModel
         public PeopleViewModel(tblStudent tblStudent)
         {
             Student = tblStudent;
+
         }
 
         public PeopleViewModel(tblTeacher teacher)

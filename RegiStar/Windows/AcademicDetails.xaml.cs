@@ -62,6 +62,7 @@ namespace RegiStar.Windows
             ((AcademicDetailsViewModel)this.DataContext).getStudentNames();
             ((AcademicDetailsViewModel)this.DataContext).getAttendances();
             ((AcademicDetailsViewModel)this.DataContext).getMedium();
+            ((AcademicDetailsViewModel)this.DataContext).GetCourses();
         }
     }
 }

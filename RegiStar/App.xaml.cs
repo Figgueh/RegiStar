@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using RegiStar.Maps;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -12,6 +14,6 @@ namespace RegiStar
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {
+    {   
     }
 }
