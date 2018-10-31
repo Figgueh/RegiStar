@@ -10,7 +10,7 @@
         <ListView x:Name="listBooks" ItemsSource="{Binding Books}" SelectedValue="{Binding SelectedBook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="273" Visibility="Hidden">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Book ID" DisplayMemberBinding="{Binding isbn}" />
+                    <GridViewColumn Header="Book ID" Width="50" DisplayMemberBinding="{Binding isbn}" />
                     <GridViewColumn Header="Book Title" DisplayMemberBinding="{Binding title}" />
                     <GridViewColumn Header="Book Author" DisplayMemberBinding="{Binding author}" />
                     <GridViewColumn Header="Book synopsis" DisplayMemberBinding="{Binding synopsis}" />
@@ -21,7 +21,7 @@
         <ListView x:Name="listTeachers" ItemsSource="{Binding Teachers}" SelectedValue="{Binding SelectedTeacher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="273" Visibility="Hidden">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Teacher ID" DisplayMemberBinding="{Binding teacherID}" />
+                    <GridViewColumn Header="Teacher ID" Width="50" DisplayMemberBinding="{Binding teacherID}" />
                     <GridViewColumn Header="Teacher Name" DisplayMemberBinding="{Binding fullName}" />
                     <GridViewColumn Header="Teacher Rmail" DisplayMemberBinding="{Binding email}" />
                     <GridViewColumn Header="Teacher Phone" DisplayMemberBinding="{Binding phone}" />
